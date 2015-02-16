@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.Core", "CCT.NUI.Core\CCT.NUI.Core.csproj", "{AA2D3699-3FC9-43D6-AA24-CD930E487BC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.Tests", "CCT.NUI.Tests\CCT.NUI.Tests.csproj", "{96DAA039-65E1-4540-908A-8B97AC13AE29}"
@@ -21,11 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.KinectSDK", "CCT.NU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.MouseControl", "CCT.NUI.MouseControl\CCT.NUI.MouseControl.csproj", "{486F10D4-B41E-4CB7-B8CF-9BD97636A646}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SideProjs", "SideProjs", "{53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -116,5 +116,16 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96DAA039-65E1-4540-908A-8B97AC13AE29} = {53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}
+		{CD9418F2-2895-480E-932D-14DBD1B1586A} = {53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}
+		{4475ED1D-4EFE-43F3-9774-96CDA04FE1BD} = {53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}
+		{00803D5A-38AC-43E2-8B84-2D978FA704EB} = {53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}
+		{486F10D4-B41E-4CB7-B8CF-9BD97636A646} = {53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

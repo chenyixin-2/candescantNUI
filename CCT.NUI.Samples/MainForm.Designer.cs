@@ -43,8 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonImageManipulation = new System.Windows.Forms.Button();
             this.videoControl = new CCT.NUI.Visual.VideoControl();
-            this.buttonHandDataFactory = new System.Windows.Forms.Button();
-            this.buttonHandTracking = new System.Windows.Forms.Button();
+            this.buttonTrajectory = new System.Windows.Forms.Button();
             this.radioOpenNINite = new System.Windows.Forms.RadioButton();
             this.radioButtonKinectWONear = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
@@ -52,9 +51,9 @@
             // buttonClustering
             // 
             this.buttonClustering.Enabled = false;
-            this.buttonClustering.Location = new System.Drawing.Point(12, 229);
+            this.buttonClustering.Location = new System.Drawing.Point(12, 211);
             this.buttonClustering.Name = "buttonClustering";
-            this.buttonClustering.Size = new System.Drawing.Size(246, 43);
+            this.buttonClustering.Size = new System.Drawing.Size(246, 40);
             this.buttonClustering.TabIndex = 6;
             this.buttonClustering.Text = "Clustering";
             this.buttonClustering.UseVisualStyleBackColor = true;
@@ -65,9 +64,9 @@
             this.buttonDepth.Enabled = false;
             this.buttonDepth.Image = ((System.Drawing.Image)(resources.GetObject("buttonDepth.Image")));
             this.buttonDepth.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDepth.Location = new System.Drawing.Point(12, 180);
+            this.buttonDepth.Location = new System.Drawing.Point(12, 166);
             this.buttonDepth.Name = "buttonDepth";
-            this.buttonDepth.Size = new System.Drawing.Size(246, 43);
+            this.buttonDepth.Size = new System.Drawing.Size(246, 40);
             this.buttonDepth.TabIndex = 5;
             this.buttonDepth.Text = "Depth Image";
             this.buttonDepth.UseVisualStyleBackColor = true;
@@ -78,9 +77,9 @@
             this.buttonRGB.Enabled = false;
             this.buttonRGB.Image = ((System.Drawing.Image)(resources.GetObject("buttonRGB.Image")));
             this.buttonRGB.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRGB.Location = new System.Drawing.Point(12, 131);
+            this.buttonRGB.Location = new System.Drawing.Point(12, 121);
             this.buttonRGB.Name = "buttonRGB";
-            this.buttonRGB.Size = new System.Drawing.Size(246, 43);
+            this.buttonRGB.Size = new System.Drawing.Size(246, 40);
             this.buttonRGB.TabIndex = 4;
             this.buttonRGB.Text = "RGB Image";
             this.buttonRGB.UseVisualStyleBackColor = true;
@@ -89,9 +88,9 @@
             // buttonExit
             // 
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonExit.Location = new System.Drawing.Point(9, 617);
+            this.buttonExit.Location = new System.Drawing.Point(9, 570);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(246, 43);
+            this.buttonExit.Size = new System.Drawing.Size(246, 40);
             this.buttonExit.TabIndex = 11;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -100,9 +99,9 @@
             // labelTBC
             // 
             this.labelTBC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTBC.Location = new System.Drawing.Point(9, 485);
+            this.labelTBC.Location = new System.Drawing.Point(9, 448);
             this.labelTBC.Name = "labelTBC";
-            this.labelTBC.Size = new System.Drawing.Size(246, 22);
+            this.labelTBC.Size = new System.Drawing.Size(246, 20);
             this.labelTBC.TabIndex = 5;
             this.labelTBC.Text = "...";
             this.labelTBC.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -111,7 +110,7 @@
             // 
             this.linkLabelBlog.AutoSize = true;
             this.linkLabelBlog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelBlog.Location = new System.Drawing.Point(12, 37);
+            this.linkLabelBlog.Location = new System.Drawing.Point(12, 34);
             this.linkLabelBlog.Name = "linkLabelBlog";
             this.linkLabelBlog.Size = new System.Drawing.Size(167, 15);
             this.linkLabelBlog.TabIndex = 1;
@@ -123,7 +122,7 @@
             // 
             this.linkLabelSource.AutoSize = true;
             this.linkLabelSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelSource.Location = new System.Drawing.Point(12, 12);
+            this.linkLabelSource.Location = new System.Drawing.Point(12, 11);
             this.linkLabelSource.Name = "linkLabelSource";
             this.linkLabelSource.Size = new System.Drawing.Size(233, 15);
             this.linkLabelSource.TabIndex = 0;
@@ -134,9 +133,9 @@
             // buttonHandAndFinger
             // 
             this.buttonHandAndFinger.Enabled = false;
-            this.buttonHandAndFinger.Location = new System.Drawing.Point(12, 278);
+            this.buttonHandAndFinger.Location = new System.Drawing.Point(12, 257);
             this.buttonHandAndFinger.Name = "buttonHandAndFinger";
-            this.buttonHandAndFinger.Size = new System.Drawing.Size(246, 43);
+            this.buttonHandAndFinger.Size = new System.Drawing.Size(246, 40);
             this.buttonHandAndFinger.TabIndex = 7;
             this.buttonHandAndFinger.Text = "Hand and Finger Detection";
             this.buttonHandAndFinger.UseVisualStyleBackColor = true;
@@ -145,9 +144,9 @@
             // buttonSettings
             // 
             this.buttonSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSettings.Location = new System.Drawing.Point(9, 568);
+            this.buttonSettings.Location = new System.Drawing.Point(9, 524);
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(246, 43);
+            this.buttonSettings.Size = new System.Drawing.Size(246, 40);
             this.buttonSettings.TabIndex = 10;
             this.buttonSettings.Text = "Settings";
             this.buttonSettings.UseVisualStyleBackColor = true;
@@ -156,9 +155,9 @@
             // radioButtonOpenNI
             // 
             this.radioButtonOpenNI.AutoSize = true;
-            this.radioButtonOpenNI.Location = new System.Drawing.Point(15, 85);
+            this.radioButtonOpenNI.Location = new System.Drawing.Point(15, 78);
             this.radioButtonOpenNI.Name = "radioButtonOpenNI";
-            this.radioButtonOpenNI.Size = new System.Drawing.Size(62, 17);
+            this.radioButtonOpenNI.Size = new System.Drawing.Size(59, 16);
             this.radioButtonOpenNI.TabIndex = 2;
             this.radioButtonOpenNI.Text = "OpenNI";
             this.radioButtonOpenNI.UseVisualStyleBackColor = true;
@@ -167,9 +166,9 @@
             // radioButtonSDK
             // 
             this.radioButtonSDK.AutoSize = true;
-            this.radioButtonSDK.Location = new System.Drawing.Point(15, 108);
+            this.radioButtonSDK.Location = new System.Drawing.Point(15, 100);
             this.radioButtonSDK.Name = "radioButtonSDK";
-            this.radioButtonSDK.Size = new System.Drawing.Size(80, 17);
+            this.radioButtonSDK.Size = new System.Drawing.Size(83, 16);
             this.radioButtonSDK.TabIndex = 3;
             this.radioButtonSDK.Text = "Kinect SDK";
             this.radioButtonSDK.UseVisualStyleBackColor = true;
@@ -178,18 +177,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 69);
+            this.label1.Location = new System.Drawing.Point(12, 64);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 13);
+            this.label1.Size = new System.Drawing.Size(179, 12);
             this.label1.TabIndex = 11;
             this.label1.Text = "Please select your framework:";
             // 
             // buttonImageManipulation
             // 
             this.buttonImageManipulation.Enabled = false;
-            this.buttonImageManipulation.Location = new System.Drawing.Point(12, 327);
+            this.buttonImageManipulation.Location = new System.Drawing.Point(12, 302);
             this.buttonImageManipulation.Name = "buttonImageManipulation";
-            this.buttonImageManipulation.Size = new System.Drawing.Size(246, 43);
+            this.buttonImageManipulation.Size = new System.Drawing.Size(246, 40);
             this.buttonImageManipulation.TabIndex = 8;
             this.buttonImageManipulation.Text = "Image Manipulation";
             this.buttonImageManipulation.UseVisualStyleBackColor = true;
@@ -201,40 +200,29 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.videoControl.BackColor = System.Drawing.Color.Black;
-            this.videoControl.Location = new System.Drawing.Point(264, 12);
+            this.videoControl.Location = new System.Drawing.Point(264, 11);
             this.videoControl.Name = "videoControl";
-            this.videoControl.Size = new System.Drawing.Size(640, 652);
+            this.videoControl.Size = new System.Drawing.Size(640, 602);
             this.videoControl.Stretch = false;
             this.videoControl.TabIndex = 8;
             // 
             // buttonHandDataFactory
             // 
-            this.buttonHandDataFactory.Enabled = false;
-            this.buttonHandDataFactory.Location = new System.Drawing.Point(12, 376);
-            this.buttonHandDataFactory.Name = "buttonHandDataFactory";
-            this.buttonHandDataFactory.Size = new System.Drawing.Size(246, 43);
-            this.buttonHandDataFactory.TabIndex = 9;
-            this.buttonHandDataFactory.Text = "Hand Data Factory";
-            this.buttonHandDataFactory.UseVisualStyleBackColor = true;
-            this.buttonHandDataFactory.Click += new System.EventHandler(this.buttonHandDataFactory_Click);
-            // 
-            // buttonHandTracking
-            // 
-            this.buttonHandTracking.Enabled = false;
-            this.buttonHandTracking.Location = new System.Drawing.Point(12, 425);
-            this.buttonHandTracking.Name = "buttonHandTracking";
-            this.buttonHandTracking.Size = new System.Drawing.Size(246, 43);
-            this.buttonHandTracking.TabIndex = 12;
-            this.buttonHandTracking.Text = "Hand Tracking (NITE)";
-            this.buttonHandTracking.UseVisualStyleBackColor = true;
-            this.buttonHandTracking.Click += new System.EventHandler(this.buttonHandTracking_Click);
+            this.buttonTrajectory.Enabled = false;
+            this.buttonTrajectory.Location = new System.Drawing.Point(12, 347);
+            this.buttonTrajectory.Name = "buttonTrajectory";
+            this.buttonTrajectory.Size = new System.Drawing.Size(246, 40);
+            this.buttonTrajectory.TabIndex = 9;
+            this.buttonTrajectory.Text = "Trajectory";
+            this.buttonTrajectory.UseVisualStyleBackColor = true;
+            this.buttonTrajectory.Click += new System.EventHandler(this.btnTrajectory_Click);
             // 
             // radioOpenNINite
             // 
             this.radioOpenNINite.AutoSize = true;
-            this.radioOpenNINite.Location = new System.Drawing.Point(80, 85);
+            this.radioOpenNINite.Location = new System.Drawing.Point(80, 78);
             this.radioOpenNINite.Name = "radioOpenNINite";
-            this.radioOpenNINite.Size = new System.Drawing.Size(99, 17);
+            this.radioOpenNINite.Size = new System.Drawing.Size(101, 16);
             this.radioOpenNINite.TabIndex = 13;
             this.radioOpenNINite.Text = "OpenNI + NITE";
             this.radioOpenNINite.UseVisualStyleBackColor = true;
@@ -243,9 +231,9 @@
             // radioButtonKinectWONear
             // 
             this.radioButtonKinectWONear.AutoSize = true;
-            this.radioButtonKinectWONear.Location = new System.Drawing.Point(101, 108);
+            this.radioButtonKinectWONear.Location = new System.Drawing.Point(101, 100);
             this.radioButtonKinectWONear.Name = "radioButtonKinectWONear";
-            this.radioButtonKinectWONear.Size = new System.Drawing.Size(155, 17);
+            this.radioButtonKinectWONear.Size = new System.Drawing.Size(167, 16);
             this.radioButtonKinectWONear.TabIndex = 14;
             this.radioButtonKinectWONear.Text = "Kinect SDK w/o near mode";
             this.radioButtonKinectWONear.UseVisualStyleBackColor = true;
@@ -253,13 +241,12 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 672);
+            this.ClientSize = new System.Drawing.Size(914, 620);
             this.Controls.Add(this.radioButtonKinectWONear);
             this.Controls.Add(this.radioOpenNINite);
-            this.Controls.Add(this.buttonHandTracking);
-            this.Controls.Add(this.buttonHandDataFactory);
+            this.Controls.Add(this.buttonTrajectory);
             this.Controls.Add(this.buttonImageManipulation);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.radioButtonSDK);
@@ -299,8 +286,7 @@
         private System.Windows.Forms.RadioButton radioButtonSDK;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonImageManipulation;
-        private System.Windows.Forms.Button buttonHandDataFactory;
-        private System.Windows.Forms.Button buttonHandTracking;
+        private System.Windows.Forms.Button buttonTrajectory;
         private System.Windows.Forms.RadioButton radioOpenNINite;
         private System.Windows.Forms.RadioButton radioButtonKinectWONear;
     }

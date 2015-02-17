@@ -46,6 +46,20 @@ namespace CCT.NUI.Samples
             this.SetImageDataSource(this.dataSourceFactory.CreateDepthBitmapDataSource());
         }
 
+        private void btnTrajectory_Click(object sender, EventArgs e)
+        {
+            this.SetTrajectoryDataSource(
+                new TrajectoryDataSource
+                    (new HandDataSource
+                        (this.dataSourceFactory.CreateShapeDataSource(
+                        this.clusteringSettings, this.shapeSettings), 
+                        this.handDetectionSettings)));
+        }
+        private void SetTrajectoryDataSource(ITrajectoryDataSource dataSource)
+        {
+            this.SetDataSource(dataSource, new TrajectoryLayer(dataSource));
+        }
+
         private void buttonClustering_Click(object sender, EventArgs e)
         {
             this.SetClusterDataSource(this.dataSourceFactory.CreateClusterDataSource(this.clusteringSettings));
@@ -172,7 +186,7 @@ namespace CCT.NUI.Samples
             Cursor.Current = Cursors.WaitCursor;
             this.InitializeOpenNI();
             this.ToggleButtons();
-            this.buttonHandDataFactory.Enabled = true;
+            this.buttonTrajectory.Enabled = true;
             Cursor.Current = Cursors.Default;
         }
 
@@ -197,13 +211,6 @@ namespace CCT.NUI.Samples
             dataSource.Start();
         }
 
-        private void buttonHandDataFactory_Click(object sender, EventArgs e)
-        {
-            var factory = new HandDataFactory(new IntSize(640, 480));
-            var handData = factory.Create((this.dataSourceFactory as OpenNIDataSourceFactory).GetDepthGenerator().DataPtr);
-            MessageBox.Show(string.Format("{0} hands detected", handData.Count), "Detection Message");
-        }
-
         private void buttonHandTracking_Click(object sender, EventArgs e)
         {
             this.SetImageDataSource(this.dataSourceFactory.CreateDepthBitmapDataSource());
@@ -220,8 +227,8 @@ namespace CCT.NUI.Samples
             Cursor.Current = Cursors.WaitCursor;
             this.Disable(this.radioButtonOpenNI, this.radioButtonSDK, this.radioButtonOpenNI);
             this.InitializeOpenNI();
-            this.buttonHandTracking.Enabled = true;
-            this.buttonHandDataFactory.Enabled = true;
+            //this.buttonHandTracking.Enabled = true;
+            this.buttonTrajectory.Enabled = true;
             Cursor.Current = Cursors.Default;
         }
 

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BrushSwitcher.cs" />
     <Compile Include="ClusterLayer.cs" />
+    <Compile Include="TrajectoryLayer.cs" />
     <Compile Include="WpfHandLayer.cs" />
     <Compile Include="WpfBrushSwitcher.cs" />
     <Compile Include="WpfClusterLayer.cs" />

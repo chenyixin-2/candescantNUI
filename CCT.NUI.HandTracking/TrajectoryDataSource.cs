@@ -19,9 +19,9 @@ namespace CCT.NUI.HandTracking
             this.CurrentValue = new TrajectoryCollection();
         }
 
-        protected override unsafe TrajectoryCollection Process(HandCollection shapeData)
+        protected override unsafe TrajectoryCollection Process(HandCollection hands)
         {
-            return this.factory.Create(shapeData);
+            return this.factory.Create(hands);
         }
     }
 }

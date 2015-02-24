@@ -206,9 +206,8 @@
             this.videoControl.Stretch = false;
             this.videoControl.TabIndex = 8;
             // 
-            // buttonHandDataFactory
+            // buttonTrajectory
             // 
-            this.buttonTrajectory.Enabled = false;
             this.buttonTrajectory.Location = new System.Drawing.Point(12, 347);
             this.buttonTrajectory.Name = "buttonTrajectory";
             this.buttonTrajectory.Size = new System.Drawing.Size(246, 40);

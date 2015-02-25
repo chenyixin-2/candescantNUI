@@ -23,7 +23,7 @@ namespace CCT.NUI.Visual
 
         public override void Paint(Graphics g)
         {
-            var trajectory = this.dataSource.CurrentValue.Trajecotry;
+            var trajectory = this.dataSource.CurrentValue.CurrentTrajectory;
             if (trajectory.Count >= 2)
             {
                 PaintTrajectory(g, trajectory);

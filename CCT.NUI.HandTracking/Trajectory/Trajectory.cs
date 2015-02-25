@@ -8,33 +8,45 @@ namespace CCT.NUI.HandTracking.Trajectory
 {
     public class TrajectoryCollection
     {
-        private bool bNewTrajectoryAvailabe;
-
-        public bool NewTrajectoryToProcess
-        {
-            get { return this.bNewTrajectoryAvailabe; }
-            set { this.bNewTrajectoryAvailabe = value; }
-        }
-
         private FingerPoint frontier;
-        private IList<FingerPoint> trajectory;
+        private List<FingerPoint> trajectory;
+        private List<List<FingerPoint>> trajectorySet;
+        private List<FingerPoint> newTrajectory;
+
         public TrajectoryCollection()
         {
+            this.newTrajectory = null;
             this.frontier = null;
             this.trajectory = new List<FingerPoint>();
-        }
-        public TrajectoryCollection(IList<FingerPoint> trajectory)
-        {
-            this.trajectory = trajectory;
+            this.trajectorySet = new List<List<FingerPoint>>();
         }
         public FingerPoint Frontier
         {
             get { return this.frontier; }
             set { this.frontier = value; }
         }
-        public IList<FingerPoint> Trajecotry
+        public List<FingerPoint> CurrentTrajectory
         {
             get { return this.trajectory; }
+        }
+        public List<List<FingerPoint>> TrajectorySet
+        {
+            get { return this.trajectorySet; }
+        }
+        public List<FingerPoint> NewTrajecotry
+        {
+            get { var traj = this.newTrajectory; this.newTrajectory = null; return traj; }
+            set { this.newTrajectory = value; }
+        }   
+        public void AddTrajectory(List<FingerPoint> trajectory)
+        {
+            this.trajectorySet.Add(trajectory);
+            this.NewTrajecotry = trajectory;
+        }
+        public void AddSamplePoint(FingerPoint pt)
+        {
+            this.CurrentTrajectory.Add(pt);
+            this.Frontier = pt;
         }
         public int Count
         {

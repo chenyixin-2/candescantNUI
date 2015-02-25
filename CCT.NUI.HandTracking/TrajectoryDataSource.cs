@@ -21,7 +21,16 @@ namespace CCT.NUI.HandTracking
 
         protected override unsafe TrajectoryCollection Process(HandCollection hands)
         {
-            return this.factory.Create(hands);
+            var ret = this.factory.Create(hands);
+            var newTraj = ret.NewTrajecotry;
+            if (newTraj != null && this.RecognizeNewTrajectory != null) 
+            {
+                this.RecognizeNewTrajectory(newTraj);
+            }
+            return ret ;
         }
+
+        public delegate void NewTrajectoryHandler(IList<FingerPoint> data);
+        public event NewTrajectoryHandler RecognizeNewTrajectory;
     }
 }

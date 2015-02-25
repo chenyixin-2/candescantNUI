@@ -11,32 +11,29 @@ namespace CCT.NUI.HandTracking
 {
     internal class TrajectoryFactory : ITrajectoryFactory
     {
-        private TrajectoryCollection currentTrajectory;
-        private IList<TrajectoryCollection> trajectoryToProcess;
+        private TrajectoryCollection trajectoryCollection;
         public TrajectoryFactory()
         {
-            this.currentTrajectory = new TrajectoryCollection();
+            this.trajectoryCollection = new TrajectoryCollection();
         }
         public TrajectoryCollection Create(HandCollection hands)
         {
-            var trajectory = this.currentTrajectory;
+            var trajectory = this.trajectoryCollection;
             if (hands.HandsDetected)
             {
                 foreach (var hand in hands.Hands)
                 {
                     if (hand.FingerPoints.Count >= 3)
                     {
-                        if (this.currentTrajectory.Count >= 2)
+                        if (this.trajectoryCollection.Count >= 2)
                         {
-                            this.trajectoryToProcess.Add(this.currentTrajectory);
-                            trajectory.Trajecotry.Clear();
-                            trajectory.NewTrajectoryToProcess = true;
+                            trajectory.AddTrajectory(trajectory.CurrentTrajectory);
+                            trajectory.CurrentTrajectory.Clear();
                         }
                     } else if (hand.FingerPoints.Count < 3 && hand.FingerPoints.Count >= 1 )
                     {
                         var newPoint = hand.FingerPoints[0];
-                        trajectory.Trajecotry.Add(newPoint);
-                        trajectory.Frontier = newPoint;
+                        trajectory.AddSamplePoint(newPoint);
                     } // finger found
                     break; // only one hand
                 }

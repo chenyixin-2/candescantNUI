@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.MouseControl", "CCT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SideProjs", "SideProjs", "{53F15BAC-8A3F-4BE9-810A-F46AD10CA88E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.Recognition", "CCT.NUI.Recognition\CCT.NUI.Recognition.csproj", "{1A70EBEF-B146-4803-A166-9F8710CC6469}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,14 @@ Global
 		{486F10D4-B41E-4CB7-B8CF-9BD97636A646}.Release|Any CPU.Build.0 = Release|Any CPU
 		{486F10D4-B41E-4CB7-B8CF-9BD97636A646}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{486F10D4-B41E-4CB7-B8CF-9BD97636A646}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

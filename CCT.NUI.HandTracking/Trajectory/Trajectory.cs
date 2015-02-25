@@ -8,6 +8,14 @@ namespace CCT.NUI.HandTracking.Trajectory
 {
     public class TrajectoryCollection
     {
+        private bool bNewTrajectoryAvailabe;
+
+        public bool NewTrajectoryToProcess
+        {
+            get { return this.bNewTrajectoryAvailabe; }
+            set { this.bNewTrajectoryAvailabe = value; }
+        }
+
         private FingerPoint frontier;
         private IList<FingerPoint> trajectory;
         public TrajectoryCollection()

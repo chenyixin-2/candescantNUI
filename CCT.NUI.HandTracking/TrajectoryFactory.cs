@@ -12,6 +12,7 @@ namespace CCT.NUI.HandTracking
     internal class TrajectoryFactory : ITrajectoryFactory
     {
         private TrajectoryCollection currentTrajectory;
+        private IList<TrajectoryCollection> trajectoryToProcess;
         public TrajectoryFactory()
         {
             this.currentTrajectory = new TrajectoryCollection();
@@ -23,12 +24,16 @@ namespace CCT.NUI.HandTracking
             {
                 foreach (var hand in hands.Hands)
                 {
-                    if (hand.FingerPoints.Count >= 1)
+                    if (hand.FingerPoints.Count >= 3)
                     {
-                        if (hand.FingerPoints.Count >= 3)
+                        if (this.currentTrajectory.Count >= 2)
                         {
+                            this.trajectoryToProcess.Add(this.currentTrajectory);
                             trajectory.Trajecotry.Clear();
+                            trajectory.NewTrajectoryToProcess = true;
                         }
+                    } else if (hand.FingerPoints.Count < 3 && hand.FingerPoints.Count >= 1 )
+                    {
                         var newPoint = hand.FingerPoints[0];
                         trajectory.Trajecotry.Add(newPoint);
                         trajectory.Frontier = newPoint;

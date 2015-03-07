@@ -46,6 +46,7 @@
             this.buttonTrajectory = new System.Windows.Forms.Button();
             this.radioOpenNINite = new System.Windows.Forms.RadioButton();
             this.radioButtonKinectWONear = new System.Windows.Forms.RadioButton();
+            this.buttonRecognizer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonClustering
@@ -208,6 +209,7 @@
             // 
             // buttonTrajectory
             // 
+            this.buttonTrajectory.Enabled = false;
             this.buttonTrajectory.Location = new System.Drawing.Point(12, 347);
             this.buttonTrajectory.Name = "buttonTrajectory";
             this.buttonTrajectory.Size = new System.Drawing.Size(246, 40);
@@ -238,11 +240,23 @@
             this.radioButtonKinectWONear.UseVisualStyleBackColor = true;
             this.radioButtonKinectWONear.CheckedChanged += new System.EventHandler(this.radioButtonKinectWONear_CheckedChanged);
             // 
+            // buttonRecognizer
+            // 
+            this.buttonRecognizer.Enabled = false;
+            this.buttonRecognizer.Location = new System.Drawing.Point(12, 405);
+            this.buttonRecognizer.Name = "buttonRecognizer";
+            this.buttonRecognizer.Size = new System.Drawing.Size(243, 40);
+            this.buttonRecognizer.TabIndex = 15;
+            this.buttonRecognizer.Text = "Recognizer";
+            this.buttonRecognizer.UseVisualStyleBackColor = true;
+            this.buttonRecognizer.Click += new System.EventHandler(this.buttonRecog_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 620);
+            this.Controls.Add(this.buttonRecognizer);
             this.Controls.Add(this.radioButtonKinectWONear);
             this.Controls.Add(this.radioOpenNINite);
             this.Controls.Add(this.buttonTrajectory);
@@ -288,6 +302,7 @@
         private System.Windows.Forms.Button buttonTrajectory;
         private System.Windows.Forms.RadioButton radioOpenNINite;
         private System.Windows.Forms.RadioButton radioButtonKinectWONear;
+        private System.Windows.Forms.Button buttonRecognizer;
     }
 }
 

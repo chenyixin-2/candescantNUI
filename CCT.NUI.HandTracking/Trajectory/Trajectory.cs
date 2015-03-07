@@ -35,7 +35,7 @@ namespace CCT.NUI.HandTracking.Trajectory
         }
         public List<FingerPoint> NewTrajecotry
         {
-            get { var traj = this.newTrajectory; this.newTrajectory = null; return traj; }
+            get { return this.newTrajectory; }
             set { this.newTrajectory = value; }
         }   
         public void AddTrajectory(List<FingerPoint> trajectory)

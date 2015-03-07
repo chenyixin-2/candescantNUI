@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SideProjs", "SideProjs", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCT.NUI.Recognition", "CCT.NUI.Recognition\CCT.NUI.Recognition.csproj", "{1A70EBEF-B146-4803-A166-9F8710CC6469}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDtw", "NDtw\NDtw.csproj", "{572EB90F-7F5D-484D-A701-C7FF1556FE32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,14 @@ Global
 		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1A70EBEF-B146-4803-A166-9F8710CC6469}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{572EB90F-7F5D-484D-A701-C7FF1556FE32}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

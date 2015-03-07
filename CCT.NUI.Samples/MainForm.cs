@@ -159,7 +159,7 @@ namespace CCT.NUI.Samples
 
         private void ToggleButtons()
         {
-            this.Enable(this.buttonClustering, this.buttonDepth, this.buttonRGB, this.buttonHandAndFinger, this.buttonImageManipulation);
+            this.Enable(this.buttonClustering, this.buttonDepth, this.buttonRGB, this.buttonHandAndFinger, this.buttonImageManipulation, this.buttonTrajectory, this.buttonRecognizer);
             this.Disable(this.radioButtonOpenNI, this.radioButtonSDK, this.radioOpenNINite, this.radioButtonKinectWONear);
         }
 
@@ -248,6 +248,11 @@ namespace CCT.NUI.Samples
             }
             this.ToggleButtons();
             Cursor.Current = Cursors.Default;
+        }
+
+        private void buttonRecog_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

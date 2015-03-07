@@ -13,7 +13,8 @@ namespace CCT.NUI.Visual
     public class TrajectoryLayer : LayerBase
     {
         private ITrajectoryDataSource dataSource;
-        private Pen yellowPen = new Pen(Brushes.Yellow, 3);
+        private Pen yellowPen = new Pen(Brushes.Yellow, 3),
+            redPen = new Pen(Brushes.Red, 3);
 
         public TrajectoryLayer(ITrajectoryDataSource dataSource)
         {
@@ -23,21 +24,27 @@ namespace CCT.NUI.Visual
 
         public override void Paint(Graphics g)
         {
-            var trajectory = this.dataSource.CurrentValue.CurrentTrajectory;
-            if (trajectory.Count >= 2)
+
+            var realtimeTrajectory = this.dataSource.CurrentValue.CurrentTrajectory;
+            if ( realtimeTrajectory != null && realtimeTrajectory.Count >= 2 )
             {
-                PaintTrajectory(g, trajectory);
+                PaintTrajectory(g, yellowPen, realtimeTrajectory);
 
                 var frontier = this.dataSource.CurrentValue.Frontier;
                 var width = 11;
                 var height = 11;
                 g.FillEllipse(Brushes.Red, (int)frontier.X - width/2, (int)frontier.Y - height/2 , width, height);
             }
+            var completeTrajectory = this.dataSource.CurrentValue.NewTrajecotry;
+            if (completeTrajectory != null && completeTrajectory.Count >= 2)
+            {
+                PaintTrajectory(g, redPen, completeTrajectory);
+            }
         }
-        private void PaintTrajectory(Graphics g, IList<FingerPoint> trajectory)
+        private void PaintTrajectory(Graphics g, Pen pen, IList<FingerPoint> trajectory)
         {
             var points = trajectory.Select(p => new System.Drawing.Point((int)p.X, (int)p.Y)).ToArray();
-            g.DrawLines(yellowPen, points);
+            g.DrawLines(pen, points);
         }
 
         private void dataSource_NewDataAvailable(TrajectoryCollection trajectory)

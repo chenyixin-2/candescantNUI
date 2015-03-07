@@ -8,8 +8,10 @@ using CCT.NUI.HandTracking.Trajectory;
 
 namespace CCT.NUI.HandTracking
 {
+    public delegate void NewTrajectoryHandler(List<FingerPoint> data);
+
     public interface ITrajectoryDataSource : IDataSource<TrajectoryCollection>
     {
-
+        event NewTrajectoryHandler RecognizeNewTrajectory;
     }
 }

@@ -19,6 +19,7 @@ namespace CCT.NUI.HandTracking
             this.CurrentValue = new TrajectoryCollection();
         }
 
+        public event NewTrajectoryHandler RecognizeNewTrajectory;
         protected override unsafe TrajectoryCollection Process(HandCollection hands)
         {
             var ret = this.factory.Create(hands);
@@ -26,11 +27,9 @@ namespace CCT.NUI.HandTracking
             if (newTraj != null && this.RecognizeNewTrajectory != null) 
             {
                 this.RecognizeNewTrajectory(newTraj);
+                ret.NewTrajecotry = null;
             }
             return ret ;
         }
-
-        public delegate void NewTrajectoryHandler(IList<FingerPoint> data);
-        public event NewTrajectoryHandler RecognizeNewTrajectory;
     }
 }

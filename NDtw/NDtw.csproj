@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A70EBEF-B146-4803-A166-9F8710CC6469}</ProjectGuid>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{572EB90F-7F5D-484D-A701-C7FF1556FE32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CCT.NUI.Recognition</RootNamespace>
-    <AssemblyName>CCT.NUI.Recognition</AssemblyName>
+    <RootNamespace>NDtw</RootNamespace>
+    <AssemblyName>NDtw</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,7 +29,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,23 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RecognizerDataSource.cs" />
+    <Compile Include="FeatureVector\IFeatureVector.cs" />
+    <Compile Include="FeatureVector\Scalar.cs" />
+    <Compile Include="Preprocessing\CentralizationPreprocessor.cs" />
+    <Compile Include="Preprocessing\NonePreprocessor.cs" />
+    <Compile Include="Preprocessing\StandardizationPreprocessor.cs" />
+    <Compile Include="Preprocessing\NormalizationPreprocessor.cs" />
+    <Compile Include="Preprocessing\IPreprocessor.cs" />
+    <Compile Include="DistanceMeasure.cs" />
+    <Compile Include="Dtw.cs" />
+    <Compile Include="IDtw.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeriesVariable.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CCT.NUI.Core\CCT.NUI.Core.csproj">
-      <Project>{aa2d3699-3fc9-43d6-aa24-cd930e487bc7}</Project>
-      <Name>CCT.NUI.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CCT.NUI.HandTracking\CCT.NUI.HandTracking.csproj">
-      <Project>{e8310b15-6b84-40a5-856d-b0ae0eee3771}</Project>
-      <Name>CCT.NUI.HandTracking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NDtw\NDtw.csproj">
-      <Project>{572eb90f-7f5d-484d-a701-c7ff1556fe32}</Project>
-      <Name>NDtw</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

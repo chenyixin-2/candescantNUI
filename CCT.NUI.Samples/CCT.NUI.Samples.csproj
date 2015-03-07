@@ -129,6 +129,10 @@
       <Project>{CDB12665-4E9E-46CA-AD74-63E943C17F62}</Project>
       <Name>CCT.NUI.KinectSDK</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CCT.NUI.Recognition\CCT.NUI.Recognition.csproj">
+      <Project>{1a70ebef-b146-4803-a166-9f8710cc6469}</Project>
+      <Name>CCT.NUI.Recognition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CCT.NUI.Visual\CCT.NUI.Visual.csproj">
       <Project>{5FCD7892-BB28-4BCC-9B57-0EAA463356ED}</Project>
       <Name>CCT.NUI.Visual</Name>

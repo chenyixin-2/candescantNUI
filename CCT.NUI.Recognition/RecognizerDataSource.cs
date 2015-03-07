@@ -13,14 +13,25 @@ using NDtw.FeatureVector;
 
 namespace CCT.NUI.Recognition
 {
-    public class RecognizerDataSource
+    public delegate void NewCandidatesAvailableHandler(SortedList<double, char> candidates);
+
+    public interface IRecognizerDataSource : IDataSource<SortedList<double, char>>
     {
+        event NewCandidatesAvailableHandler OnNewCandidatesAvailable;
+    }
+    public class RecognizerDataSource : 
+        DataSourceProcessor<SortedList<double, char>, TrajectoryCollection> ,
+        IRecognizerDataSource
+    {
+        public event NewCandidatesAvailableHandler OnNewCandidatesAvailable;
+
         private char[] _enabledCharset = { 'a', 'b', 'c' } ;
         private Dictionary<char, IList<IList<IFeatureVectorsData>>> _trainingData = new Dictionary<char, IList<IList<IFeatureVectorsData>>>();
-        private SortedList<double, char> _sortedResult = new SortedList<double, char>();
 
-        public RecognizerDataSource(ITrajectoryDataSource dataSource)
+        public RecognizerDataSource(ITrajectoryDataSource dataSource) :
+            base(dataSource)
         {
+            this.CurrentValue = new SortedList<double, char>();
             dataSource.RecognizeNewTrajectory += Training;
             dataSource.RecognizeNewTrajectory += Recognize;
         }
@@ -54,6 +65,12 @@ namespace CCT.NUI.Recognition
             featuresArray.Add(velFeatures);
             return featuresArray;
         }
+
+        protected override SortedList<double, char> Process(TrajectoryCollection sourceData)
+        {
+            return null;
+        }
+
         public void Training(IList<FingerPoint> trajectory) 
         {
             for ( int i = 0; i < _enabledCharset.Length; ++i )
@@ -64,7 +81,7 @@ namespace CCT.NUI.Recognition
         }
         public void Recognize(IList<FingerPoint> trajectory)
         {
-            _sortedResult.Clear();
+            this.CurrentValue.Clear();
 
             var featuresArray = FeatureExtraction(trajectory);
 
@@ -81,7 +98,12 @@ namespace CCT.NUI.Recognition
                 var dtw = new Dtw(seriesVariableArray, DistanceMeasure.Cosine);
                 var similarity = dtw.GetCost();
 
-                _sortedResult.Add(similarity, candidateChar);
+                this.CurrentValue.Add(similarity, candidateChar);
+            }
+
+            if (this.OnNewCandidatesAvailable != null)
+            {
+                this.OnNewCandidatesAvailable(this.CurrentValue);
             }
         }
     }

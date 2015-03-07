@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BrushSwitcher.cs" />
     <Compile Include="ClusterLayer.cs" />
+    <Compile Include="RecognitionLayer.cs" />
     <Compile Include="TrajectoryLayer.cs" />
     <Compile Include="WpfHandLayer.cs" />
     <Compile Include="WpfBrushSwitcher.cs" />
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\CCT.NUI.HandTracking\CCT.NUI.HandTracking.csproj">
       <Project>{E8310B15-6B84-40A5-856D-B0AE0EEE3771}</Project>
       <Name>CCT.NUI.HandTracking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CCT.NUI.Recognition\CCT.NUI.Recognition.csproj">
+      <Project>{1a70ebef-b146-4803-a166-9f8710cc6469}</Project>
+      <Name>CCT.NUI.Recognition</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

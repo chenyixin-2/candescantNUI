@@ -46,7 +46,8 @@
             this.buttonTrajectory = new System.Windows.Forms.Button();
             this.radioOpenNINite = new System.Windows.Forms.RadioButton();
             this.radioButtonKinectWONear = new System.Windows.Forms.RadioButton();
-            this.buttonRecognizer = new System.Windows.Forms.Button();
+            this.buttonTraining = new System.Windows.Forms.Button();
+            this.buttonTesting = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonClustering
@@ -100,7 +101,7 @@
             // labelTBC
             // 
             this.labelTBC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTBC.Location = new System.Drawing.Point(9, 448);
+            this.labelTBC.Location = new System.Drawing.Point(12, 492);
             this.labelTBC.Name = "labelTBC";
             this.labelTBC.Size = new System.Drawing.Size(246, 20);
             this.labelTBC.TabIndex = 5;
@@ -216,7 +217,7 @@
             this.buttonTrajectory.TabIndex = 9;
             this.buttonTrajectory.Text = "Trajectory";
             this.buttonTrajectory.UseVisualStyleBackColor = true;
-            this.buttonTrajectory.Click += new System.EventHandler(this.btnTrajectory_Click);
+            this.buttonTrajectory.Click += new System.EventHandler(this.buttonTrajectory_Click);
             // 
             // radioOpenNINite
             // 
@@ -240,23 +241,34 @@
             this.radioButtonKinectWONear.UseVisualStyleBackColor = true;
             this.radioButtonKinectWONear.CheckedChanged += new System.EventHandler(this.radioButtonKinectWONear_CheckedChanged);
             // 
-            // buttonRecognizer
+            // buttonTraining
             // 
-            this.buttonRecognizer.Enabled = false;
-            this.buttonRecognizer.Location = new System.Drawing.Point(12, 405);
-            this.buttonRecognizer.Name = "buttonRecognizer";
-            this.buttonRecognizer.Size = new System.Drawing.Size(243, 40);
-            this.buttonRecognizer.TabIndex = 15;
-            this.buttonRecognizer.Text = "Recognizer";
-            this.buttonRecognizer.UseVisualStyleBackColor = true;
-            this.buttonRecognizer.Click += new System.EventHandler(this.buttonRecog_Click);
+            this.buttonTraining.Enabled = false;
+            this.buttonTraining.Location = new System.Drawing.Point(12, 393);
+            this.buttonTraining.Name = "buttonTraining";
+            this.buttonTraining.Size = new System.Drawing.Size(243, 40);
+            this.buttonTraining.TabIndex = 15;
+            this.buttonTraining.Text = "Training";
+            this.buttonTraining.UseVisualStyleBackColor = true;
+            this.buttonTraining.Click += new System.EventHandler(this.buttonRecognitionTraining_Click);
+            // 
+            // buttonTesting
+            // 
+            this.buttonTesting.Location = new System.Drawing.Point(9, 439);
+            this.buttonTesting.Name = "buttonTesting";
+            this.buttonTesting.Size = new System.Drawing.Size(243, 40);
+            this.buttonTesting.TabIndex = 16;
+            this.buttonTesting.Text = "Testing";
+            this.buttonTesting.UseVisualStyleBackColor = true;
+            this.buttonTesting.Click += new System.EventHandler(this.buttonRecognitionTesting_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 620);
-            this.Controls.Add(this.buttonRecognizer);
+            this.Controls.Add(this.buttonTesting);
+            this.Controls.Add(this.buttonTraining);
             this.Controls.Add(this.radioButtonKinectWONear);
             this.Controls.Add(this.radioOpenNINite);
             this.Controls.Add(this.buttonTrajectory);
@@ -302,7 +314,8 @@
         private System.Windows.Forms.Button buttonTrajectory;
         private System.Windows.Forms.RadioButton radioOpenNINite;
         private System.Windows.Forms.RadioButton radioButtonKinectWONear;
-        private System.Windows.Forms.Button buttonRecognizer;
+        private System.Windows.Forms.Button buttonTraining;
+        private System.Windows.Forms.Button buttonTesting;
     }
 }
 

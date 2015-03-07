@@ -17,6 +17,7 @@ using CCT.NUI.Core.Shape;
 using CCT.NUI.Samples.ImageManipulation;
 using CCT.NUI.KinectSDK;
 using CCT.NUI.Core.Video;
+using CCT.NUI.Recognition;
 
 namespace CCT.NUI.Samples
 {
@@ -24,6 +25,7 @@ namespace CCT.NUI.Samples
     {
         private IList<IDataSource> activeDataSources;
         private IDataSourceFactory dataSourceFactory;
+        private IRecognizerDataSource recognizer;
 
         private ClusterDataSourceSettings clusteringSettings = new ClusterDataSourceSettings();
         private ShapeDataSourceSettings shapeSettings = new ShapeDataSourceSettings();
@@ -34,6 +36,13 @@ namespace CCT.NUI.Samples
             InitializeComponent();
             this.activeDataSources = new List<IDataSource>();
             this.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
+
+            this.recognizer = 
+                new RecognizerDataSource
+                (new TrajectoryDataSource
+                (new HandDataSource(
+                    this.dataSourceFactory.CreateShapeDataSource(this.clusteringSettings, this.shapeSettings),
+                        this.handDetectionSettings)));
         }
 
         private void buttonRGB_Click(object sender, EventArgs e)
@@ -46,7 +55,7 @@ namespace CCT.NUI.Samples
             this.SetImageDataSource(this.dataSourceFactory.CreateDepthBitmapDataSource());
         }
 
-        private void btnTrajectory_Click(object sender, EventArgs e)
+        private void buttonTrajectory_Click(object sender, EventArgs e)
         {
             this.SetTrajectoryDataSource(
                 new TrajectoryDataSource
@@ -159,7 +168,7 @@ namespace CCT.NUI.Samples
 
         private void ToggleButtons()
         {
-            this.Enable(this.buttonClustering, this.buttonDepth, this.buttonRGB, this.buttonHandAndFinger, this.buttonImageManipulation, this.buttonTrajectory, this.buttonRecognizer);
+            this.Enable(this.buttonClustering, this.buttonDepth, this.buttonRGB, this.buttonHandAndFinger, this.buttonImageManipulation, this.buttonTrajectory, this.buttonTraining);
             this.Disable(this.radioButtonOpenNI, this.radioButtonSDK, this.radioOpenNINite, this.radioButtonKinectWONear);
         }
 
@@ -250,9 +259,13 @@ namespace CCT.NUI.Samples
             Cursor.Current = Cursors.Default;
         }
 
-        private void buttonRecog_Click(object sender, EventArgs e)
+        private void buttonRecognitionTraining_Click(object sender, EventArgs e)
         {
 
+        }
+        private void buttonRecognitionTesting_Click(object sender, EventArgs e)
+        {
+            SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
         }
     }
 }

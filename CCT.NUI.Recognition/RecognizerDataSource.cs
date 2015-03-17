@@ -19,28 +19,23 @@ namespace CCT.NUI.Recognition
     {
         event NewCandidatesAvailableHandler OnNewCandidatesAvailable;
     }
-    public class RecognizerDataSource : 
-        DataSourceProcessor<SortedList<double, char>, TrajectoryCollection> ,
-        IRecognizerDataSource
+    public interface IFeatureExtracter
     {
-        public event NewCandidatesAvailableHandler OnNewCandidatesAvailable;
+        IList<IList<IFeatureVectorsData>> Extract(IList<FingerPoint> trajectory);
+    }
 
-        private char[] _enabledCharset = { 'a', 'b', 'c' } ;
-        private Dictionary<char, IList<IList<IFeatureVectorsData>>> _trainingData = new Dictionary<char, IList<IList<IFeatureVectorsData>>>();
+    public class VelcAccFeatures : 
+        IFeatureExtracter
+    {
+        public VelcAccFeatures()
+        {}
 
-        public RecognizerDataSource(ITrajectoryDataSource dataSource) :
-            base(dataSource)
-        {
-            this.CurrentValue = new SortedList<double, char>();
-            dataSource.RecognizeNewTrajectory += Training;
-            dataSource.RecognizeNewTrajectory += Recognize;
-        }
-        private IList<IList<IFeatureVectorsData>> FeatureExtraction(IList<FingerPoint> trajectory)
+        public IList<IList<IFeatureVectorsData>> Extract(IList<FingerPoint> trajectory)
         {
             IList<IList<IFeatureVectorsData>> featuresArray = new List<IList<IFeatureVectorsData>>();
             IList<IFeatureVectorsData> accFeatures = new List<IFeatureVectorsData>(),
                 velFeatures = new List<IFeatureVectorsData>();
-            for ( int i = 2; i < trajectory.Count; ++i )
+            for (int i = 2; i < trajectory.Count; ++i)
             {
                 var x1 = trajectory[i - 2];
                 var x2 = trajectory[i - 1];
@@ -65,6 +60,27 @@ namespace CCT.NUI.Recognition
             featuresArray.Add(velFeatures);
             return featuresArray;
         }
+    }
+
+    public class RecognizerDataSource : 
+        DataSourceProcessor<SortedList<double, char>, TrajectoryCollection> ,
+        IRecognizerDataSource
+    {
+        public event NewCandidatesAvailableHandler OnNewCandidatesAvailable;
+
+        private char[] _enabledCharset = { 'a', 'b', 'c' } ;
+        private Dictionary<char, IList<IList<IFeatureVectorsData>>> _trainingData = new Dictionary<char, IList<IList<IFeatureVectorsData>>>();
+        private IFeatureExtracter _featureExtracter
+            ;//= new VelcAccFeatures();
+
+
+        public RecognizerDataSource(ITrajectoryDataSource dataSource) :
+            base(dataSource)
+        {
+            this.CurrentValue = new SortedList<double, char>();
+            dataSource.RecognizeNewTrajectory += Training;
+            dataSource.RecognizeNewTrajectory += Recognize;
+        }
 
         protected override SortedList<double, char> Process(TrajectoryCollection sourceData)
         {
@@ -75,7 +91,7 @@ namespace CCT.NUI.Recognition
         {
             for ( int i = 0; i < _enabledCharset.Length; ++i )
             {
-                var featuresArrayAccVelo = FeatureExtraction(trajectory);
+                var featuresArrayAccVelo = _featureExtracter.Extract(trajectory);
                 _trainingData.Add(_enabledCharset[i], featuresArrayAccVelo);
             }
         }
@@ -83,7 +99,7 @@ namespace CCT.NUI.Recognition
         {
             this.CurrentValue.Clear();
 
-            var featuresArray = FeatureExtraction(trajectory);
+            var featuresArray = _featureExtracter.Extract(trajectory);
 
             for (int i = 0; i < _enabledCharset.Length; ++i)
             {

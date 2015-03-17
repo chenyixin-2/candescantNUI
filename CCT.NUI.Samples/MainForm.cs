@@ -37,12 +37,7 @@ namespace CCT.NUI.Samples
             this.activeDataSources = new List<IDataSource>();
             this.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
 
-            this.recognizer = 
-                new RecognizerDataSource
-                (new TrajectoryDataSource
-                (new HandDataSource(
-                    this.dataSourceFactory.CreateShapeDataSource(this.clusteringSettings, this.shapeSettings),
-                        this.handDetectionSettings)));
+            this.recognizer = null;
         }
 
         private void buttonRGB_Click(object sender, EventArgs e)
@@ -155,6 +150,10 @@ namespace CCT.NUI.Samples
             try
             {
                 this.dataSourceFactory = new SDKDataSourceFactory();
+                this.recognizer =
+                    new RecognizerDataSource(
+                        new TrajectoryDataSource(
+                            new HandDataSource(this.dataSourceFactory.CreateShapeDataSource(this.clusteringSettings, this.shapeSettings),this.handDetectionSettings)));
             }
             catch (Exception exc)
             {
@@ -265,7 +264,7 @@ namespace CCT.NUI.Samples
         }
         private void buttonRecognitionTesting_Click(object sender, EventArgs e)
         {
-            SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
+            //SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
         }
     }
 }

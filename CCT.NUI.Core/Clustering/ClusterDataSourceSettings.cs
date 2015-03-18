@@ -43,7 +43,7 @@ namespace CCT.NUI.Core.Clustering
             settings.LowerBorder = 75;
             settings.MinimumDepthThreshold = 500;
             settings.MaximumDepthThreshold = 800;
-            settings.ClusterCount = 2;
+            settings.ClusterCount = 1;
 
             settings.MergeMinimumDistanceToCluster = 50;
             settings.MergeMaximumClusterCenterDistances = 120;

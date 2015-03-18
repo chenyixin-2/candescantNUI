@@ -25,26 +25,25 @@ namespace CCT.NUI.Visual
         public override void Paint(Graphics g)
         {
 
-            var realtimeTrajectory = this.dataSource.CurrentValue.CurrentTrajectory;
+            var realtimeTrajectory = this.dataSource.CurrentValue.NewTrajectory;
             if ( realtimeTrajectory != null && realtimeTrajectory.Count >= 2 )
             {
                 PaintTrajectory(g, yellowPen, realtimeTrajectory);
 
-                var frontier = this.dataSource.CurrentValue.Frontier;
+                var frontier = realtimeTrajectory.Frontier;
                 var width = 11;
                 var height = 11;
                 g.FillEllipse(Brushes.Red, (int)frontier.X - width/2, (int)frontier.Y - height/2 , width, height);
             }
-            var completeTrajectory = this.dataSource.CurrentValue.NewTrajecotry;
-            if (completeTrajectory != null && completeTrajectory.Count >= 2)
-            {
-                PaintTrajectory(g, redPen, completeTrajectory);
-            }
+            //var completeTrajectory = this.dataSource.CurrentValue.NewTrajecotry;
+            //if (completeTrajectory != null && completeTrajectory.Count >= 2)
+            //{
+            //    PaintTrajectory(g, redPen, completeTrajectory);
+            //}
         }
-        private void PaintTrajectory(Graphics g, Pen pen, IList<FingerPoint> trajectory)
+        private void PaintTrajectory(Graphics g, Pen pen, Trajectory trajectory)
         {
-            var points = trajectory.Select(p => new System.Drawing.Point((int)p.X, (int)p.Y)).ToArray();
-            g.DrawLines(pen, points);
+            g.DrawLines(pen, trajectory.Points);
         }
 
         private void dataSource_NewDataAvailable(TrajectoryCollection trajectory)

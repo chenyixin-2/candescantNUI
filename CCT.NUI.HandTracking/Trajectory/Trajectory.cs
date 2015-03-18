@@ -3,63 +3,92 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Drawing;
+
 using CCT.NUI.HandTracking;
+
 namespace CCT.NUI.HandTracking.Trajectory
 {
-    public class TrajectoryCollection
+    public class Trajectory
     {
-        private FingerPoint frontier;
         private List<FingerPoint> trajectory;
-        private List<List<FingerPoint>> trajectorySet;
-        private List<FingerPoint> newTrajectory;
+        private FingerPoint frontier;
 
-        public TrajectoryCollection()
+        public Trajectory()
         {
-            this.newTrajectory = null;
             this.frontier = null;
             this.trajectory = new List<FingerPoint>();
-            this.trajectorySet = new List<List<FingerPoint>>();
+        }
+        public int Count
+        {
+            get { return trajectory.Count; }
+        }
+        public Point[] Points
+        {
+            get { return this.trajectory.Select(p => new Point((int)p.X, (int)p.Y)).ToArray(); }
         }
         public FingerPoint Frontier
         {
             get { return this.frontier; }
             set { this.frontier = value; }
         }
-        public List<FingerPoint> CurrentTrajectory
+        public void Add(FingerPoint pt)
         {
-            get { return this.trajectory; }
+            this.trajectory.Add(pt);
         }
-        public List<List<FingerPoint>> TrajectorySet
+
+        // we make a indexer here
+        public FingerPoint this [int idx]
         {
-            get { return this.trajectorySet; }
+            get
+            {
+                if ( idx >= this.trajectory.Count || idx < 0 )
+                {
+                    return null;
+                }
+                else 
+                    return this.trajectory[idx];
+            }
+            set
+            {
+                if ( !(idx >= this.trajectory.Count || idx < 0) )
+                    this.trajectory[idx] = value;
+            }
+
         }
-        public List<FingerPoint> NewTrajecotry
+    }
+    public class TrajectoryCollection
+    {
+        private IList<Trajectory> trajectorySet;
+        private Trajectory newTrajectory;
+
+        public TrajectoryCollection()
+        {
+            this.newTrajectory = null;
+            this.trajectorySet = new List<Trajectory>();
+        }
+
+        public Trajectory NewTrajectory
         {
             get { return this.newTrajectory; }
             set { this.newTrajectory = value; }
-        }   
-        public void AddTrajectory(List<FingerPoint> trajectory)
+        }
+        public IList<Trajectory> TrajectorySet
+        {
+            get { return this.trajectorySet; }
+        }
+        public void AddTrajectory(Trajectory trajectory)
         {
             this.trajectorySet.Add(trajectory);
-            this.NewTrajecotry = trajectory;
         }
         public void AddSamplePoint(FingerPoint pt)
         {
-            this.CurrentTrajectory.Add(pt);
-            this.Frontier = pt;
+            this.NewTrajectory.Add(pt);
+            this.NewTrajectory.Frontier = pt;
         }
-        public int Count
+        public int NewTrajectoryLength
         {
-            get { return this.trajectory.Count; }
-        }
-
-        public bool TrajectoryExists
-        {
-            get { return this.Count > 0; }
-        }
-        public bool IsEmpty
-        {
-            get { return this.Count == 0; }
+            get { return this.newTrajectory.Count; }
         }
     }
 }

@@ -19,17 +19,25 @@ namespace CCT.NUI.HandTracking
             this.CurrentValue = new TrajectoryCollection();
         }
 
-        public event NewTrajectoryHandler RecognizeNewTrajectory;
+        public event NewTrajectoryHandler NewTrajectoryAvailable;
         protected override unsafe TrajectoryCollection Process(HandCollection hands)
         {
-            var ret = this.factory.Create(hands);
-            var newTraj = ret.NewTrajecotry;
-            if (newTraj != null && this.RecognizeNewTrajectory != null) 
+            //var ret = null;
+            if ( hands.Count > 0 )
             {
-                this.RecognizeNewTrajectory(newTraj);
-                ret.NewTrajecotry = null;
+                var newTrajectoryCollection = this.factory.Create(hands);
+                var newTraj = newTrajectoryCollection.NewTrajectory;
+                if (newTraj != null && this.NewTrajectoryAvailable != null)
+                {
+                    this.NewTrajectoryAvailable(newTraj);
+                    newTrajectoryCollection.NewTrajectory = null;
+                }
+                return newTrajectoryCollection;
             }
-            return ret ;
+            else
+            {
+                return null;
+            }
         }
     }
 }

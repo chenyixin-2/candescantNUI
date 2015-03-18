@@ -13,15 +13,22 @@ using NDtw.FeatureVector;
 
 namespace CCT.NUI.Recognition
 {
-    public delegate void NewCandidatesAvailableHandler(SortedList<double, char> candidates);
+    public delegate void NewCandidatesAvailableHandler();
+    public enum RecognizerWorkingState
+    {
+        Stop = 0,
+        Test = 1,
+        Train = 2,
+    }
 
     public interface IRecognizerDataSource : IDataSource<SortedList<double, char>>
     {
+        void SetWorkingState(RecognizerWorkingState state);
         event NewCandidatesAvailableHandler OnNewCandidatesAvailable;
     }
     public interface IFeatureExtracter
     {
-        IList<IList<IFeatureVectorsData>> Extract(IList<FingerPoint> trajectory);
+        IList<IList<IFeatureVectorsData>> Extract(Trajectory trajectory);
     }
 
     public class VelcAccFeatures : 
@@ -30,7 +37,7 @@ namespace CCT.NUI.Recognition
         public VelcAccFeatures()
         {}
 
-        public IList<IList<IFeatureVectorsData>> Extract(IList<FingerPoint> trajectory)
+        public IList<IList<IFeatureVectorsData>> Extract(Trajectory trajectory)
         {
             IList<IList<IFeatureVectorsData>> featuresArray = new List<IList<IFeatureVectorsData>>();
             IList<IFeatureVectorsData> accFeatures = new List<IFeatureVectorsData>(),
@@ -70,35 +77,47 @@ namespace CCT.NUI.Recognition
 
         private char[] _enabledCharset = { 'a', 'b', 'c' } ;
         private Dictionary<char, IList<IList<IFeatureVectorsData>>> _trainingData = new Dictionary<char, IList<IList<IFeatureVectorsData>>>();
-        private IFeatureExtracter _featureExtracter
-            ;//= new VelcAccFeatures();
+        private IFeatureExtracter _featureExtracter = new VelcAccFeatures();
 
+        private RecognizerWorkingState _workingState = RecognizerWorkingState.Stop;
 
         public RecognizerDataSource(ITrajectoryDataSource dataSource) :
             base(dataSource)
         {
             this.CurrentValue = new SortedList<double, char>();
-            dataSource.RecognizeNewTrajectory += Training;
-            dataSource.RecognizeNewTrajectory += Recognize;
+            dataSource.NewTrajectoryAvailable += Recognize;
+            dataSource.NewTrajectoryAvailable += Training;
+        }
+        
+        public void SetWorkingState(RecognizerWorkingState state)
+        {
+            this._workingState = state;
         }
 
+        // Process updates dataSource.CurrentValue by default
+        // 
         protected override SortedList<double, char> Process(TrajectoryCollection sourceData)
         {
-            return null;
+            return this.CurrentValue;
         }
 
-        public void Training(IList<FingerPoint> trajectory) 
+        public void Training(Trajectory trajectory) 
         {
+            if (this._workingState != RecognizerWorkingState.Train) 
+                return;
+
             for ( int i = 0; i < _enabledCharset.Length; ++i )
             {
                 var featuresArrayAccVelo = _featureExtracter.Extract(trajectory);
                 _trainingData.Add(_enabledCharset[i], featuresArrayAccVelo);
             }
         }
-        public void Recognize(IList<FingerPoint> trajectory)
+        public void Recognize(Trajectory trajectory)
         {
-            this.CurrentValue.Clear();
+            if (this._workingState != RecognizerWorkingState.Test)
+                return;
 
+            var candidates = new SortedList<double, char>();
             var featuresArray = _featureExtracter.Extract(trajectory);
 
             for (int i = 0; i < _enabledCharset.Length; ++i)
@@ -114,12 +133,14 @@ namespace CCT.NUI.Recognition
                 var dtw = new Dtw(seriesVariableArray, DistanceMeasure.Cosine);
                 var similarity = dtw.GetCost();
 
-                this.CurrentValue.Add(similarity, candidateChar);
+                candidates.Add(similarity, candidateChar);
             }
+
+            this.CurrentValue = candidates;
 
             if (this.OnNewCandidatesAvailable != null)
             {
-                this.OnNewCandidatesAvailable(this.CurrentValue);
+                this.OnNewCandidatesAvailable();
             }
         }
     }

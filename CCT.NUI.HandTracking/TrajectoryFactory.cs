@@ -18,27 +18,26 @@ namespace CCT.NUI.HandTracking
         }
         public TrajectoryCollection Create(HandCollection hands)
         {
-            var trajectory = this.trajectoryCollection;
+            var trajectorySet = this.trajectoryCollection;
             if (hands.HandsDetected)
             {
                 foreach (var hand in hands.Hands)
                 {
-                    if (hand.FingerPoints.Count >= 3)
+                    if (hand.FingerPoints.Count >= 3)  // Gesture Delimeter encounts
                     {
-                        if (this.trajectoryCollection.Count >= 2)
+                        if ( this.trajectoryCollection.NewTrajectoryLength >= 3 )
                         {
-                            trajectory.AddTrajectory(trajectory.CurrentTrajectory);
-                            trajectory.CurrentTrajectory.Clear();
+                            trajectorySet.AddTrajectory(trajectorySet.NewTrajectory);
                         }
-                    } else if (hand.FingerPoints.Count < 3 && hand.FingerPoints.Count >= 1 )
+                    } 
+                    else if (hand.FingerPoints.Count < 3 && hand.FingerPoints.Count >= 1 )
                     {
-                        var newPoint = hand.FingerPoints[0];
-                        trajectory.AddSamplePoint(newPoint);
+                        trajectorySet.AddSamplePoint(hand.FingerPoints[0]);
                     } // finger found
                     break; // only one hand
                 }
             }
-            return trajectory; 
+            return trajectorySet; 
         }
     }
 }

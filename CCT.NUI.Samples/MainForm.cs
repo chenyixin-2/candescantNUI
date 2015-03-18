@@ -260,11 +260,13 @@ namespace CCT.NUI.Samples
 
         private void buttonRecognitionTraining_Click(object sender, EventArgs e)
         {
-
+            this.recognizer.SetWorkingState(RecognizerWorkingState.Train);
+            SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
         }
         private void buttonRecognitionTesting_Click(object sender, EventArgs e)
         {
-            //SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
+            this.recognizer.SetWorkingState(RecognizerWorkingState.Test);
+            SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
         }
     }
 }

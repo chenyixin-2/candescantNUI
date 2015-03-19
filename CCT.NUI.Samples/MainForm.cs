@@ -157,7 +157,7 @@ namespace CCT.NUI.Samples
             try
             {
                 this.dataSourceFactory = new SDKDataSourceFactory();
-                this.trajectoryCollector = new MockTrajectoryCollector("test.xml");
+                this.trajectoryCollector = new MockTrajectoryCollector("MockTrajectory.xml");
             }
             catch (Exception exc)
             {

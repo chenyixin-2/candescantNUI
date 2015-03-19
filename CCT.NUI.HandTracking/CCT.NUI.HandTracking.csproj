@@ -89,6 +89,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Touch\KinectMultiTouchDevice.cs" />
     <Compile Include="Touch\KinectTouchDevice.cs" />
+    <Compile Include="TrajectoryCollector\ITrajectoryCollector.cs" />
+    <Compile Include="TrajectoryCollector\MockTrajectoryCollector.cs" />
     <Compile Include="TrajectoryDataSource.cs" />
     <Compile Include="TrajectoryFactory.cs" />
     <Compile Include="ITrajectoryDataSource.cs" />

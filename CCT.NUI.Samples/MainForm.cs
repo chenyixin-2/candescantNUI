@@ -18,6 +18,7 @@ using CCT.NUI.Samples.ImageManipulation;
 using CCT.NUI.KinectSDK;
 using CCT.NUI.Core.Video;
 using CCT.NUI.Recognition;
+using CCT.NUI.HandTracking.TrajectoryCollector;
 
 namespace CCT.NUI.Samples
 {
@@ -26,7 +27,7 @@ namespace CCT.NUI.Samples
         private IList<IDataSource> activeDataSources;
         private IDataSourceFactory dataSourceFactory;
         private IRecognizerDataSource recognizer;
-
+        private ITrajectoryCollector trajectoryCollector;
         private ClusterDataSourceSettings clusteringSettings = new ClusterDataSourceSettings();
         private ShapeDataSourceSettings shapeSettings = new ShapeDataSourceSettings();
         private HandDataSourceSettings handDetectionSettings = new HandDataSourceSettings();
@@ -50,14 +51,17 @@ namespace CCT.NUI.Samples
             this.SetImageDataSource(this.dataSourceFactory.CreateDepthBitmapDataSource());
         }
 
-        private void buttonTrajectory_Click(object sender, EventArgs e)
+        private void buttonCollectTrajectory_Click(object sender, EventArgs e)
         {
-            this.SetTrajectoryDataSource(
-                new TrajectoryDataSource
+            var trajectoryDataSource = new TrajectoryDataSource
                     (new HandDataSource
                         (this.dataSourceFactory.CreateShapeDataSource(
-                        this.clusteringSettings, this.shapeSettings), 
-                        this.handDetectionSettings)));
+                        this.clusteringSettings, this.shapeSettings),
+                        this.handDetectionSettings));
+
+            trajectoryDataSource.NewTrajectoryAvailable += this.trajectoryCollector.Collecct;
+
+            this.SetTrajectoryDataSource(trajectoryDataSource);
         }
         private void SetTrajectoryDataSource(ITrajectoryDataSource dataSource)
         {
@@ -103,6 +107,7 @@ namespace CCT.NUI.Samples
             }
             this.activeDataSources.Clear();
             this.videoControl.Clear();
+            
         }
 
         void layer_RequestRefresh(object sender, EventArgs e)
@@ -112,6 +117,8 @@ namespace CCT.NUI.Samples
 
         void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.trajectoryCollector.Serialize();
+
             this.Clear();
             if (this.dataSourceFactory != null)
             {
@@ -150,10 +157,7 @@ namespace CCT.NUI.Samples
             try
             {
                 this.dataSourceFactory = new SDKDataSourceFactory();
-                this.recognizer =
-                    new RecognizerDataSource(
-                        new TrajectoryDataSource(
-                            new HandDataSource(this.dataSourceFactory.CreateShapeDataSource(this.clusteringSettings, this.shapeSettings),this.handDetectionSettings)));
+                this.trajectoryCollector = new MockTrajectoryCollector("test.xml");
             }
             catch (Exception exc)
             {
@@ -260,8 +264,17 @@ namespace CCT.NUI.Samples
 
         private void buttonRecognitionTraining_Click(object sender, EventArgs e)
         {
+            //this.recognizer =
+            //     new RecognizerDataSource(
+            //         new TrajectoryDataSource(
+            //             new HandDataSource(this.dataSourceFactory.CreateShapeDataSource(this.clusteringSettings, this.shapeSettings), this.handDetectionSettings)));
+
+            var mockTrajectoryDataSource = new MockTrajectoryDataSource(this.trajectoryCollector);
+            this.recognizer = new RecognizerDataSource(mockTrajectoryDataSource);
             this.recognizer.SetWorkingState(RecognizerWorkingState.Train);
             SetDataSource(this.recognizer, new RecognitionLayer(this.recognizer));
+
+            mockTrajectoryDataSource.StartMocking();
         }
         private void buttonRecognitionTesting_Click(object sender, EventArgs e)
         {

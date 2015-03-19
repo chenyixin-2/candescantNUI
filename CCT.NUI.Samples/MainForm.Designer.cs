@@ -217,7 +217,7 @@
             this.buttonTrajectory.TabIndex = 9;
             this.buttonTrajectory.Text = "Trajectory";
             this.buttonTrajectory.UseVisualStyleBackColor = true;
-            this.buttonTrajectory.Click += new System.EventHandler(this.buttonTrajectory_Click);
+            this.buttonTrajectory.Click += new System.EventHandler(this.buttonCollectTrajectory_Click);
             // 
             // radioOpenNINite
             // 

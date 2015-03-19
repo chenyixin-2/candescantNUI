@@ -12,32 +12,32 @@ namespace CCT.NUI.HandTracking
     internal class TrajectoryFactory : ITrajectoryFactory
     {
         private TrajectoryCollection trajectoryCollection;
-        public TrajectoryFactory()
+        public TrajectoryFactory(TrajectoryCollection data)
         {
-            this.trajectoryCollection = new TrajectoryCollection();
+            this.trajectoryCollection = data;
         }
         public TrajectoryCollection Create(HandCollection hands)
         {
-            var trajectorySet = this.trajectoryCollection;
+            var trajectoryCollection = this.trajectoryCollection;
             if (hands.HandsDetected)
             {
                 foreach (var hand in hands.Hands)
                 {
                     if (hand.FingerPoints.Count >= 3)  // Gesture Delimeter encounts
                     {
-                        if ( this.trajectoryCollection.NewTrajectoryLength >= 3 )
+                        if ( trajectoryCollection.CurrentTrajectoryLength >= 3 )
                         {
-                            trajectorySet.AddTrajectory(trajectorySet.NewTrajectory);
+                            trajectoryCollection.AddNewTrajectory();
                         }
                     } 
                     else if (hand.FingerPoints.Count < 3 && hand.FingerPoints.Count >= 1 )
                     {
-                        trajectorySet.AddSamplePoint(hand.FingerPoints[0]);
+                        trajectoryCollection.AddSamplePoint(hand.FingerPoints[0]);
                     } // finger found
                     break; // only one hand
                 }
             }
-            return trajectorySet; 
+            return trajectoryCollection; 
         }
     }
 }

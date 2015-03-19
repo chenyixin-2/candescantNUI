@@ -15,29 +15,20 @@ namespace CCT.NUI.HandTracking
         public TrajectoryDataSource(IHandDataSource handDataSource)
             :base(handDataSource)
         {
-            this.factory = new TrajectoryFactory();
             this.CurrentValue = new TrajectoryCollection();
+            this.factory = new TrajectoryFactory(this.CurrentValue);
         }
 
         public event NewTrajectoryHandler NewTrajectoryAvailable;
         protected override unsafe TrajectoryCollection Process(HandCollection hands)
         {
-            //var ret = null;
-            if ( hands.Count > 0 )
+            var processedData = this.factory.Create(hands);
+            var newTraj = processedData.NewTrajectory;
+            if (newTraj != null && this.NewTrajectoryAvailable != null)
             {
-                var newTrajectoryCollection = this.factory.Create(hands);
-                var newTraj = newTrajectoryCollection.NewTrajectory;
-                if (newTraj != null && this.NewTrajectoryAvailable != null)
-                {
-                    this.NewTrajectoryAvailable(newTraj);
-                    newTrajectoryCollection.NewTrajectory = null;
-                }
-                return newTrajectoryCollection;
+                this.NewTrajectoryAvailable(newTraj);
             }
-            else
-            {
-                return null;
-            }
+            return processedData;
         }
     }
 }

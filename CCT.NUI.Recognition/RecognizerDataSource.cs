@@ -42,7 +42,7 @@ namespace CCT.NUI.Recognition
             IList<IList<IFeatureVectorsData>> featuresArray = new List<IList<IFeatureVectorsData>>();
             IList<IFeatureVectorsData> accFeatures = new List<IFeatureVectorsData>(),
                 velFeatures = new List<IFeatureVectorsData>();
-            for (int i = 2; i < trajectory.Count; ++i)
+            for (int i = 2; i < trajectory.Length; ++i)
             {
                 var x1 = trajectory[i - 2];
                 var x2 = trajectory[i - 1];

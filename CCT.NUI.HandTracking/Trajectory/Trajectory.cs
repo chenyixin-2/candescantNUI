@@ -19,7 +19,7 @@ namespace CCT.NUI.HandTracking.Trajectory
             this.frontier = null;
             this.trajectory = new List<FingerPoint>();
         }
-        public int Count
+        public int Length
         {
             get { return trajectory.Count; }
         }
@@ -31,6 +31,10 @@ namespace CCT.NUI.HandTracking.Trajectory
         {
             get { return this.frontier; }
             set { this.frontier = value; }
+        }
+        public void Reset()
+        {
+            this.trajectory.Clear();
         }
         public void Add(FingerPoint pt)
         {
@@ -60,35 +64,62 @@ namespace CCT.NUI.HandTracking.Trajectory
     public class TrajectoryCollection
     {
         private IList<Trajectory> trajectorySet;
-        private Trajectory newTrajectory;
+        private Trajectory currentTrajectory;
+        private bool bNewTrajectory = false;
 
         public TrajectoryCollection()
         {
-            this.newTrajectory = null;
+            this.currentTrajectory = new Trajectory();
             this.trajectorySet = new List<Trajectory>();
         }
 
         public Trajectory NewTrajectory
         {
-            get { return this.newTrajectory; }
-            set { this.newTrajectory = value; }
+            get 
+            {
+                if ( bNewTrajectory )
+                {
+                    return this.trajectorySet[trajectorySet.Count - 1]; 
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
         public IList<Trajectory> TrajectorySet
         {
             get { return this.trajectorySet; }
         }
-        public void AddTrajectory(Trajectory trajectory)
+        public void ResetNewTrajectory()
         {
-            this.trajectorySet.Add(trajectory);
+            this.bNewTrajectory = false;
+        }
+        public void AddNewTrajectory()
+        {
+            this.trajectorySet.Add(this.currentTrajectory);
+            this.bNewTrajectory = true;
+            this.currentTrajectory = new Trajectory();
         }
         public void AddSamplePoint(FingerPoint pt)
         {
-            this.NewTrajectory.Add(pt);
-            this.NewTrajectory.Frontier = pt;
+            this.currentTrajectory.Add(pt);
+            this.currentTrajectory.Frontier = pt;
         }
         public int NewTrajectoryLength
         {
-            get { return this.newTrajectory.Count; }
+            get 
+            {
+                var newtraj = this.NewTrajectory;
+                if (newtraj != null)
+                    return newtraj.Length;
+                else
+                    return 0;
+            }
+        }
+        public int CurrentTrajectoryLength
+        {
+            get { return this.currentTrajectory.Length; }
         }
     }
 }

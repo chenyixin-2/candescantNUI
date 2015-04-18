@@ -87,7 +87,7 @@ namespace CCT.NUI.Visual
             g.ScaleTransform(this.zoomFactor, this.zoomFactor);
             if (this.ShowConvexHull)
             {
-                this.PaintCovexHull(hand, g);
+                //this.PaintCovexHull(hand, g);
             }
             if (this.ShowContour && hand.Contour != null)
             {

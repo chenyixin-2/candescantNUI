@@ -22,7 +22,7 @@ namespace CCT.NUI.HandTracking.Mouse
                 twoFingersDetected = null;
             }
 
-            if (twoFingersDetected.HasValue && DateTime.Now > twoFingersDetected.Value.AddMilliseconds(100))
+            if (twoFingersDetected.HasValue && DateTime.Now > twoFingersDetected.Value.AddMilliseconds(33*5))  // fps 30hz, so 1000/30 * frames to wait
             {
                 if (fingerCount == 2 && !this.mouseDown)
                 {

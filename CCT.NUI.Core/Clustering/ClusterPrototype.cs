@@ -96,7 +96,7 @@ namespace CCT.NUI.Core.Clustering
         {
             var rangeZ = new Range(this.points.Select(p => p.Z));
             float maxZValue = rangeZ.Min + maxDepth;
-            if (rangeZ.Interval > maxDepth)
+            if (rangeZ.Interval > maxDepth)  // 区间长度 超过 maxDepth 
             {
                 this.points = this.points.Where(p => p.Z < maxZValue).ToList();
                 this.CalculateCenter();

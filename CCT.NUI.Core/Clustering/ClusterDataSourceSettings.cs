@@ -41,8 +41,8 @@ namespace CCT.NUI.Core.Clustering
             settings.MaximalPointsForValidCluster = 1000;
             settings.PointModulo = 5;
             settings.LowerBorder = 75;
-            settings.MinimumDepthThreshold = 500;
-            settings.MaximumDepthThreshold = 800;
+            settings.MinimumDepthThreshold = 800;
+            settings.MaximumDepthThreshold = 900;
             settings.ClusterCount = 1;
 
             settings.MergeMinimumDistanceToCluster = 50;

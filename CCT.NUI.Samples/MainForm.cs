@@ -17,6 +17,8 @@ using CCT.NUI.Core.Shape;
 using CCT.NUI.Samples.ImageManipulation;
 using CCT.NUI.KinectSDK;
 using CCT.NUI.Core.Video;
+
+// Recognition
 using CCT.NUI.Recognition;
 using CCT.NUI.HandTracking.TrajectoryCollector;
 
@@ -117,7 +119,7 @@ namespace CCT.NUI.Samples
 
         void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.trajectoryCollector.Serialize();
+            //this.trajectoryCollector.Serialize();
 
             this.Clear();
             if (this.dataSourceFactory != null)
@@ -157,7 +159,7 @@ namespace CCT.NUI.Samples
             try
             {
                 this.dataSourceFactory = new SDKDataSourceFactory();
-                this.trajectoryCollector = new MockTrajectoryCollector("MockTrajectory.xml");
+                //this.trajectoryCollector = new MockTrajectoryCollector("MockTrajectory.xml");
             }
             catch (Exception exc)
             {

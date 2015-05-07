@@ -36,10 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenNI.net, Version=1.5.2.23, Culture=neutral, PublicKeyToken=6b43d0c6cf74ee7f, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\OpenNI\OpenNI.net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -53,10 +49,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="XnVNITE.net, Version=1.5.2.21, Culture=neutral, PublicKeyToken=399870656fc6c787, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\OpenNI\XnVNITE.net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -109,6 +101,10 @@
     <ProjectReference Include="..\CCT.NUI.HandTracking\CCT.NUI.HandTracking.csproj">
       <Project>{E8310B15-6B84-40A5-856D-B0AE0EEE3771}</Project>
       <Name>CCT.NUI.HandTracking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CCT.NUI.KinectSDK\CCT.NUI.KinectSDK.csproj">
+      <Project>{cdb12665-4e9e-46ca-ad74-63e943c17f62}</Project>
+      <Name>CCT.NUI.KinectSDK</Name>
     </ProjectReference>
     <ProjectReference Include="..\CCT.NUI.Visual\CCT.NUI.Visual.csproj">
       <Project>{5FCD7892-BB28-4BCC-9B57-0EAA463356ED}</Project>

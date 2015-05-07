@@ -6,7 +6,7 @@ using System.Text;
 namespace CCT.NUI.HandTracking.Mouse
 {
     public abstract class ClickModeBase : IClickMode
-    {
+     {
         public abstract void Process(HandCollection handData);
 
         protected void MouseUp()

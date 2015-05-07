@@ -91,7 +91,7 @@ namespace CCT.NUI.HandTracking.Mouse
 
         void handSource_NewDataAvailable(HandCollection handData)
         {
-            if (!this.Enabled || handData.Count == 0)
+            if (!this.Enabled || handData.Count == 0) // 判断 手势 的 数量
             {
                 return;
             }

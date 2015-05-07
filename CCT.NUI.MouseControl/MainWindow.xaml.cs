@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -11,9 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CCT.NUI.Core.OpenNI;
+
 using CCT.NUI.HandTracking;
 using CCT.NUI.HandTracking.Mouse;
+using System.Windows;
+
+// Kinect data source
+using CCT.NUI.Core;
+using CCT.NUI.KinectSDK;
 
 namespace CCT.NUI.MouseControl
 {
@@ -22,9 +26,9 @@ namespace CCT.NUI.MouseControl
     /// </summary>
     public partial class MainWindow : Window
     {
-        private OpenNIDataSourceFactory factory;
+        private IDataSourceFactory factory;
         private IHandDataSource handDataSource;        
-        private TrackingClusterDataSource trackingClusterDataSource;        
+        //private TrackingClusterDataSource trackingClusterDataSource;        
         private MouseController mouseController;
 
         public MainWindow()
@@ -40,6 +44,11 @@ namespace CCT.NUI.MouseControl
         private void buttonToggle_Click(object sender, RoutedEventArgs e)
         {
             this.mouseController.Enabled = !this.mouseController.Enabled;
+            if (this.mouseController.Enabled)
+                this.buttonToggle.Content = "Gesture Control Enabled";
+            else
+                this.buttonToggle.Content = "Enable Mouse Control";
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -60,10 +69,11 @@ namespace CCT.NUI.MouseControl
             {
                 this.comboMode.Items.Add(modeCombination);
             }
-            this.factory = new OpenNIDataSourceFactory("mouse_config.xml");
+            //this.factory = new OpenNIDataSourceFactory("mouse_config.xml");
+            this.factory = new SDKDataSourceFactory();
             var depthImageDataSource = this.factory.CreateDepthImageDataSource();
             depthImageDataSource.NewDataAvailable += new Core.NewDataHandler<ImageSource>(MainWindow_NewDataAvailable);
-            this.trackingClusterDataSource = this.factory.CreateTrackingClusterDataSource();
+            //this.trackingClusterDataSource = this.factory.CreateTrackingClusterDataSource();
             depthImageDataSource.Start();
             CreateController();
         }
@@ -77,10 +87,11 @@ namespace CCT.NUI.MouseControl
 
         private void CreateControllerInTrackingMode()
         {
-            this.handDataSource = new HandDataSource(this.factory.CreateShapeDataSource(this.trackingClusterDataSource));
-            this.mouseController = new MouseController(this.handDataSource, this.trackingClusterDataSource);
-            this.mouseController.Enabled = this.buttonToggle.IsChecked.Value;
-            this.handDataSource.Start();
+            //this.handDataSource = new HandDataSource(this.factory.CreateShapeDataSource(this.trackingClusterDataSource));
+            //this.mouseController = new MouseController(this.handDataSource, this.trackingClusterDataSource);
+            //this.mouseController.Enabled = this.buttonToggle.IsChecked.Value;
+            //this.handDataSource.Start();
+            MessageBox.Show("Tracking Cluster Data Source Commented Out");
         }
 
         private void SetMode()

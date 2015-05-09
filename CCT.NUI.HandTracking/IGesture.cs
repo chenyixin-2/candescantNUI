@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using CCT.NUI.Core;
+
 namespace CCT.NUI.HandTracking.Gesture
 {
     public interface IGesture
@@ -15,8 +17,11 @@ namespace CCT.NUI.HandTracking.Gesture
 
     public abstract class GestureBase : IGesture
     {
-        public GestureBase(String name)
+        private int width, height;
+        public GestureBase(String name, int w, int h)
         {
+            this.width = w;
+            this.height = h;
             this.name = name;
         }
         private String name ;
@@ -26,6 +31,12 @@ namespace CCT.NUI.HandTracking.Gesture
         }
 
         public abstract void process(HandCollection handData, ref IGesture gestureState);
-        public abstract void cleanup(); 
+        public abstract void cleanup();
+
+        protected Point MapToScreen(Point point)
+        {
+            var originalSize = new Size(this.width, this.height);
+            return new Point(-50 + (float)(point.X / originalSize.Width * (System.Windows.SystemParameters.PrimaryScreenWidth + 100)), -50 + (float)(point.Y / originalSize.Height * (System.Windows.SystemParameters.PrimaryScreenHeight + 100)), point.Z);
+        }
     }
 }

@@ -11,16 +11,13 @@ namespace CCT.NUI.HandTracking.Gesture
 {
     public class MoveGesture : GestureBase
     {
-        private int width, height;
         private Point? lastPointOnScreen;
         private IClickMode clickMode = new TwoFingerClickMode();
         private ICursorMode cursorMode = new FingerCursorMode();
 
         public MoveGesture(int w, int h):
-            base("Move")
+            base("Move", w, h)
         {
-            this.width = w;
-            this.height = h;
         }
 
         public override void process(HandCollection handData, ref IGesture gestureState)
@@ -67,12 +64,5 @@ namespace CCT.NUI.HandTracking.Gesture
         {
 
         }
-
-        private Point MapToScreen(Point point)
-        {
-            var originalSize = new Size(this.width, this.height);
-            return new Point(-50 + (float)(point.X / originalSize.Width * (System.Windows.SystemParameters.PrimaryScreenWidth + 100)), -50 + (float)(point.Y / originalSize.Height * (System.Windows.SystemParameters.PrimaryScreenHeight + 100)), point.Z);
-        }
-
     }
 }

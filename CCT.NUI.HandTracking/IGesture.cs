@@ -4,9 +4,19 @@ using System.Linq;
 using System.Text;
 
 using CCT.NUI.Core;
+using CCT.NUI.HandTracking.Mouse;
 
 namespace CCT.NUI.HandTracking.Gesture
 {
+    public enum Gestures : int
+    {
+        Move_Write = 1,
+        Drag_Ready = 2,
+        Drag_On    = 4,
+        Click      = 3,
+        Stop       = 5   
+    };
+
     public interface IGesture
     {
         void process(HandCollection handData, ref IGesture gestureState);
@@ -18,6 +28,11 @@ namespace CCT.NUI.HandTracking.Gesture
     public abstract class GestureBase : IGesture
     {
         private int width, height;
+
+        protected Point? lastPointOnScreen;
+        protected IClickMode clickMode = new FingerClickMode();
+        protected ICursorMode cursorMode = new FingerCursorMode();
+
         public GestureBase(String name, int w, int h)
         {
             this.width = w;

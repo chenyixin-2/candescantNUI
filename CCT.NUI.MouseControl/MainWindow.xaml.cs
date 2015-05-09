@@ -86,14 +86,18 @@ namespace CCT.NUI.MouseControl
             this.handDataSource = new HandDataSource(this.factory.CreateShapeDataSource(this.factory.CreateClusterDataSource(new Core.Clustering.ClusterDataSourceSettings { MaximumDepthThreshold = 900 }), new Core.Shape.ShapeDataSourceSettings()));
 
             var gestureList = new List<IGesture>();
-            var moveGesture = new MoveGesture(this.handDataSource.Width,
-                this.handDataSource.Height);
+            var width = this.handDataSource.Width;
+            var height = this.handDataSource.Height;
+
+            var moveGesture = new MoveGesture(width, height);
+            var dragGesture = new DragGesture(width, height);
+            var clickGesture = new ClickGesture(width, height);
 
             gestureList.Add(moveGesture);
+            gestureList.Add(dragGesture);
+            gestureList.Add(clickGesture);
 
-            this.mouseController = new MouseController(this.handDataSource, 
-                this.buttonToggle.IsChecked.Value,
-                gestureList);
+            this.mouseController = new MouseController(this.handDataSource, this.buttonToggle.IsChecked.Value, gestureList);
             this.handDataSource.Start();
         }
 

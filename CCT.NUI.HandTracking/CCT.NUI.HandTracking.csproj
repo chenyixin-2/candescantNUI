@@ -54,6 +54,8 @@
     <Compile Include="FingerBaseDetector.cs" />
     <Compile Include="FingerPoint.cs" />
     <Compile Include="FingerPointDetector.cs" />
+    <Compile Include="Gesture\ClickGesture.cs" />
+    <Compile Include="Gesture\DragGesture.cs" />
     <Compile Include="Gesture\MoveGesture.cs" />
     <Compile Include="HandCollection.cs" />
     <Compile Include="HandData.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="Mouse\ClickModeBase.cs" />
     <Compile Include="Mouse\HandClickMode.cs" />
     <Compile Include="Mouse\HandTrackingCursorMode.cs" />
-    <Compile Include="Mouse\TwoFingerClickMode.cs" />
+    <Compile Include="Mouse\FingerClickMode.cs" />
     <Compile Include="Mouse\FingerCursorMode.cs" />
     <Compile Include="Mouse\IClickMode.cs" />
     <Compile Include="Mouse\ICursorMode.cs" />

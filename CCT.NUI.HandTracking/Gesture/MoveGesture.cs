@@ -11,9 +11,6 @@ namespace CCT.NUI.HandTracking.Gesture
 {
     public class MoveGesture : GestureBase
     {
-        private Point? lastPointOnScreen;
-        private IClickMode clickMode = new TwoFingerClickMode();
-        private ICursorMode cursorMode = new FingerCursorMode();
 
         public MoveGesture(int w, int h):
             base("Move", w, h)
@@ -24,7 +21,7 @@ namespace CCT.NUI.HandTracking.Gesture
         {
             var fingerCount = handData.Hands.First().FingerCount;
 
-            if ( fingerCount < 1 || fingerCount >=2 ) // not valid handData for MoveGesture
+            if ( fingerCount != (int)Gestures.Move_Write ) // not valid handData for MoveGesture
             {
                 // 注意： 可以增加延时策略，增加鲁棒性
                 gestureState = null;
@@ -54,9 +51,7 @@ namespace CCT.NUI.HandTracking.Gesture
                 UserInput.SetCursorPositionAbsolute((int)newX, (int)newY);
                 lastPointOnScreen = new Point((float)newX, (float)newY, 0);
 
-                //this.clickMode.Process(handData);
-
-                gestureState = this; // update state
+                gestureState = this;
             }
         }
 

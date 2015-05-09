@@ -18,8 +18,8 @@ namespace CCT.NUI.HandTracking.Mouse
         private IGesture gestureState;
 
         private IHandDataSource handSource;
-        //private Point? lastPointOnScreen;
-        private IClickMode clickMode = new TwoFingerClickMode();
+
+        private IClickMode clickMode = new FingerClickMode();
         private ICursorMode cursorMode = new FingerCursorMode();
         private TrackingClusterDataSource trackingClusterDataSource;
 
@@ -98,7 +98,7 @@ namespace CCT.NUI.HandTracking.Mouse
             switch (mode)
             {
                 case ClickMode.TwoFinger:
-                    this.clickMode = new TwoFingerClickMode();
+                    this.clickMode = new FingerClickMode();
                     break;
                 case ClickMode.SecondHand:
                     this.clickMode = new SecondHandClickMode();
@@ -121,7 +121,7 @@ namespace CCT.NUI.HandTracking.Mouse
             {
                 this.gestureState.process(handData, ref g);
             }
-            else // g == null
+            else // gestureState == null
             {
                 foreach ( var gest in this.gestureList )
                 {
@@ -133,7 +133,7 @@ namespace CCT.NUI.HandTracking.Mouse
 
             this.gestureState = g; // update new state
 
-            if ( g != null )
+            if ( g == null )
             {
                 foreach ( var gest in this.gestureList )
                 {

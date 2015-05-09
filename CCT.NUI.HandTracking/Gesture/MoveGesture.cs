@@ -9,25 +9,21 @@ using CCT.NUI.HandTracking.Mouse;
 
 namespace CCT.NUI.HandTracking.Gesture
 {
-    public class MoveGesture : IGesture
+    public class MoveGesture : GestureBase
     {
         private int width, height;
-        private String name = "Move";
         private Point? lastPointOnScreen;
         private IClickMode clickMode = new TwoFingerClickMode();
         private ICursorMode cursorMode = new FingerCursorMode();
 
-        public MoveGesture(int w, int h)
+        public MoveGesture(int w, int h):
+            base("Move")
         {
             this.width = w;
             this.height = h;
         }
-        public String Name
-        {
-            get { return this.name; } 
-        }
 
-        public void process(HandCollection handData, ref IGesture gestureState)
+        public override void process(HandCollection handData, ref IGesture gestureState)
         {
             var fingerCount = handData.Hands.First().FingerCount;
 
@@ -67,7 +63,7 @@ namespace CCT.NUI.HandTracking.Gesture
             }
         }
 
-        public void cleanup()
+        public  override void cleanup()
         {
 
         }

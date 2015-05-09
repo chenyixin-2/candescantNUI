@@ -93,9 +93,9 @@ namespace CCT.NUI.MouseControl
             var dragGesture = new DragGesture(width, height);
             var clickGesture = new ClickGesture(width, height);
 
-            gestureList.Add(moveGesture);
+            //gestureList.Add(moveGesture);
             gestureList.Add(dragGesture);
-            gestureList.Add(clickGesture);
+            //gestureList.Add(clickGesture);
 
             this.mouseController = new MouseController(this.handDataSource, this.buttonToggle.IsChecked.Value, gestureList);
             this.handDataSource.Start();

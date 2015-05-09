@@ -9,5 +9,7 @@ namespace CCT.NUI.HandTracking.Gesture
     {
         void process(HandCollection handData, ref IGesture gestureState);
         void cleanup();
+
+        String Name { get;}
     }
 }

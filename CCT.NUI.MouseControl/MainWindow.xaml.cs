@@ -145,6 +145,15 @@ namespace CCT.NUI.MouseControl
         void MainWindow_NewDataAvailable(ImageSource data)
         {
             this.videoControl.ShowImageSource(data);
+
+            if ( this.StateMonitor.Items.Count > 10 )
+            {
+                this.StateMonitor.Items.Clear();
+            }
+            var gestName = this.mouseController.GestureName;
+            this.StateMonitor.Items.Add(gestName);
+            var items = this.StateMonitor.Items;
+            this.StateMonitor.ScrollIntoView(items[items.Count-1]);
         }
 
         private void checkTopmost_Checked(object sender, RoutedEventArgs e)

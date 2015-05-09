@@ -48,6 +48,16 @@ namespace CCT.NUI.HandTracking.Mouse
 
         public bool Enabled { get; set; }
 
+        public String GestureName
+        {
+            get 
+            {
+                if (this.gestureState != null)
+                    return this.gestureState.Name;
+                else
+                    return "Null Gesture";
+            }
+        }
         public void Dispose()
         {
             this.Enabled = false;

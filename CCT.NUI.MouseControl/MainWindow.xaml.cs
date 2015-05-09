@@ -19,6 +19,9 @@ using System.Windows;
 using CCT.NUI.Core;
 using CCT.NUI.KinectSDK;
 
+// gesture support
+using CCT.NUI.HandTracking.Gesture;
+
 namespace CCT.NUI.MouseControl
 {
     /// <summary>
@@ -81,7 +84,16 @@ namespace CCT.NUI.MouseControl
         private void CreateController()
         {
             this.handDataSource = new HandDataSource(this.factory.CreateShapeDataSource(this.factory.CreateClusterDataSource(new Core.Clustering.ClusterDataSourceSettings { MaximumDepthThreshold = 900 }), new Core.Shape.ShapeDataSourceSettings()));
-            this.mouseController = new MouseController(this.handDataSource, this.buttonToggle.IsChecked.Value);
+
+            var gestureList = new List<IGesture>();
+            var moveGesture = new MoveGesture(this.handDataSource.Width,
+                this.handDataSource.Height);
+
+            gestureList.Add(moveGesture);
+
+            this.mouseController = new MouseController(this.handDataSource, 
+                this.buttonToggle.IsChecked.Value,
+                gestureList);
             this.handDataSource.Start();
         }
 

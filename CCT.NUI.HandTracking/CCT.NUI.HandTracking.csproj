@@ -54,9 +54,11 @@
     <Compile Include="FingerBaseDetector.cs" />
     <Compile Include="FingerPoint.cs" />
     <Compile Include="FingerPointDetector.cs" />
+    <Compile Include="Gesture\MoveGesture.cs" />
     <Compile Include="HandCollection.cs" />
     <Compile Include="HandData.cs" />
     <Compile Include="HandDataFactory.cs" />
+    <Compile Include="IGesture.cs" />
     <Compile Include="ITrajectoryFactory.cs" />
     <Compile Include="Mouse\CenterOfHandCursorMode.cs" />
     <Compile Include="Mouse\CenterOfClusterCursorMode.cs" />

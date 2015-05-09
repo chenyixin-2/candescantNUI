@@ -5,6 +5,8 @@ using System.Text;
 using CCT.NUI.Core;
 using CCT.NUI.Core.OpenNI;
 
+using CCT.NUI.HandTracking.Gesture;
+
 namespace CCT.NUI.HandTracking.Mouse
 {
     public enum ClickMode { TwoFinger = 0, SecondHand = 1, Hand = 2 }
@@ -12,8 +14,11 @@ namespace CCT.NUI.HandTracking.Mouse
 
     public class MouseController : IDisposable
     {
+        private IList<IGesture> gestureList;
+        private IGesture gestureState;
+
         private IHandDataSource handSource;
-        private Point? lastPointOnScreen;
+        //private Point? lastPointOnScreen;
         private IClickMode clickMode = new TwoFingerClickMode();
         private ICursorMode cursorMode = new FingerCursorMode();
         private TrackingClusterDataSource trackingClusterDataSource;
@@ -22,12 +27,17 @@ namespace CCT.NUI.HandTracking.Mouse
         {
             this.handSource = handSource;
             this.handSource.NewDataAvailable += new NewDataHandler<HandCollection>(handSource_NewDataAvailable);
+            this.gestureState = null;
+            this.gestureList = null;
         }
 
-        public MouseController(IHandDataSource handSource, bool enabled)
+        public MouseController(IHandDataSource handSource, bool enabled,
+            IList<IGesture> gestList)
             : this(handSource)
         {
             this.Enabled = enabled;
+            this.gestureState = null;
+            this.gestureList = gestList;
         }
 
         public MouseController(IHandDataSource handSource, TrackingClusterDataSource trackingClusterDataSource)
@@ -96,39 +106,30 @@ namespace CCT.NUI.HandTracking.Mouse
                 return;
             }
 
-            if(this.cursorMode.HasPoint(handData))
+            var g = this.gestureState;
+            if ( g != null )  // operating some gestures
             {
-                var pointOnScreen = this.MapToScreen(this.cursorMode.GetPoint(handData));
-
-                double newX = pointOnScreen.X;
-                double newY = pointOnScreen.Y;
-
-                if (lastPointOnScreen.HasValue)
-                {
-                    var distance = Point.Distance2D(pointOnScreen, lastPointOnScreen.Value);
-                    if (distance < 100)
-                    {
-                        newX = lastPointOnScreen.Value.X + (newX - lastPointOnScreen.Value.X) * (distance / 100);
-                        newY = lastPointOnScreen.Value.Y + (newY - lastPointOnScreen.Value.Y) * (distance / 100);
-                    }
-                    if (distance < 10)
-                    {
-                        newX = lastPointOnScreen.Value.X;
-                        newY = lastPointOnScreen.Value.Y; 
-                    }
-                }
-
-                UserInput.SetCursorPositionAbsolute((int)newX, (int)newY);
-                lastPointOnScreen = new Point((float)newX, (float)newY, 0);
-
-                this.clickMode.Process(handData);
+                this.gestureState.process(handData, ref g);
             }
-        }
+            else // g == null
+            {
+                foreach ( var gest in this.gestureList )
+                {
+                    gest.process(handData, ref g);
+                    if (g != null)
+                        break;
+                }
+            }
 
-        private Point MapToScreen(Point point)
-        {
-            var originalSize = new Size(this.handSource.Width, this.handSource.Height);
-            return new Point(-50 + (float)(point.X / originalSize.Width * (System.Windows.SystemParameters.PrimaryScreenWidth + 100)), -50 + (float)(point.Y / originalSize.Height * (System.Windows.SystemParameters.PrimaryScreenHeight + 100)), point.Z);
+            this.gestureState = g; // update new state
+
+            if ( g != null )
+            {
+                foreach ( var gest in this.gestureList )
+                {
+                    gest.cleanup();
+                }
+            }
         }
     }
 }

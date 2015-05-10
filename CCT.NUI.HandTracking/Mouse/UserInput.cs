@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace CCT.NUI.HandTracking.Mouse
 {
-    internal class UserInput
+    public class UserInput
     {
         public static void SetCursorPositionAbsolute(int x, int y)
         {                            

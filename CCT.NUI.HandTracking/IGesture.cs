@@ -22,7 +22,7 @@ namespace CCT.NUI.HandTracking.Gesture
         void process(HandCollection handData, ref IGesture gestureState);
         void cleanup();
 
-        String Name { get;}
+        String Name { get; set; }
     }
 
     public abstract class GestureBase : IGesture
@@ -43,6 +43,7 @@ namespace CCT.NUI.HandTracking.Gesture
         public String Name
         {
             get { return this.name; }
+            set { this.name = value; }
         }
 
         public abstract void process(HandCollection handData, ref IGesture gestureState);

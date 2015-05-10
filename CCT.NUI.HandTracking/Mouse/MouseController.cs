@@ -111,23 +111,30 @@ namespace CCT.NUI.HandTracking.Mouse
 
         void handSource_NewDataAvailable(HandCollection handData)
         {
-            if (!this.Enabled || handData.Count == 0) // 判断 手势 的 数量
+            if ( !this.Enabled ) // 判断 手势 的 数量
             {
                 return;
             }
 
             var g = this.gestureState;
-            if ( g != null )  // operating some gestures
+            if (handData.Count == 0)
             {
-                this.gestureState.process(handData, ref g);
+                g = null;
             }
-            else // gestureState == null
+            else
             {
-                foreach ( var gest in this.gestureList )
+                if (g != null)  // operating some gestures
                 {
-                    gest.process(handData, ref g);
-                    if (g != null)
-                        break;
+                    this.gestureState.process(handData, ref g);
+                }
+                else // gestureState == null
+                {
+                    foreach (var gest in this.gestureList)
+                    {
+                        gest.process(handData, ref g);
+                        if (g != null)
+                            break;
+                    }
                 }
             }
 

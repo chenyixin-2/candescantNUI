@@ -57,6 +57,7 @@
     <Compile Include="Gesture\ClickGesture.cs" />
     <Compile Include="Gesture\DragGesture.cs" />
     <Compile Include="Gesture\MoveGesture.cs" />
+    <Compile Include="Gesture\NullGesture.cs" />
     <Compile Include="HandCollection.cs" />
     <Compile Include="HandData.cs" />
     <Compile Include="HandDataFactory.cs" />

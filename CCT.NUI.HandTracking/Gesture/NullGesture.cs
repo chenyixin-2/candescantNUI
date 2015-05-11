@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-//
-using CCT.NUI.Core;
-using CCT.NUI.HandTracking.Mouse;
-
 namespace CCT.NUI.HandTracking.Gesture
 {
-    public class MoveGesture : GestureBase
+    public class NullGesture : GestureBase
     {
-
-        public MoveGesture(int w, int h):
-            base("Move", w, h)
+        public NullGesture(int w = 0, int h = 0):
+            base("Null++++++++++++++", w, h)
         {
+
         }
 
         public override void process(HandCollection handData, ref IGesture gestureState)
         {
-            var fingerCount = handData.Hands.First().FingerCount;
-
-            if ( fingerCount != (int)Gestures.Move_Write ) // not valid handData for MoveGesture
+            if ( handData.Hands.Count != (int)Gestures.Null )
             {
                 if (!this.InAbnormal())
                 {
@@ -41,14 +35,10 @@ namespace CCT.NUI.HandTracking.Gesture
                 }
 
                 gestureState = this;
-
-                var pointOnScreen = this.MapToScreen(this.cursorMode.GetPoint(handData));
-
-                this.MoveToScreen(pointOnScreen);
             }
         }
 
-        public  override void cleanup()
+        public override void cleanup()
         {
             if (this.InAbnormal())
                 this.LeaveAbnormal();

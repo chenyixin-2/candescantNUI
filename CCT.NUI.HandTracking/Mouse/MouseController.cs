@@ -19,6 +19,7 @@ namespace CCT.NUI.HandTracking.Mouse
 
         private IHandDataSource handSource;
 
+        private IGesture nullGesture = new NullGesture();
         private IClickMode clickMode = new FingerClickMode();
         private ICursorMode cursorMode = new FingerCursorMode();
         private TrackingClusterDataSource trackingClusterDataSource;
@@ -38,6 +39,7 @@ namespace CCT.NUI.HandTracking.Mouse
             this.Enabled = enabled;
             this.gestureState = null;
             this.gestureList = gestList;
+            this.gestureList.Add(nullGesture);
         }
 
         public MouseController(IHandDataSource handSource, TrackingClusterDataSource trackingClusterDataSource)
@@ -55,7 +57,7 @@ namespace CCT.NUI.HandTracking.Mouse
                 if (this.gestureState != null)
                     return this.gestureState.Name;
                 else
-                    return "Null Gesture";
+                    return "Unknown Gesture";
             }
         }
         public void Dispose()
@@ -117,13 +119,13 @@ namespace CCT.NUI.HandTracking.Mouse
             }
 
             var g = this.gestureState;
-            if (handData.Count == 0)
+            if (handData.Hands.Count == 0)
             {
-                g = null;
+                g = nullGesture;
             }
-            else
+            else // hand available
             {
-                if (g != null)  // operating some gestures
+                if (this.gestureState != null)  // operating some gestures
                 {
                     this.gestureState.process(handData, ref g);
                 }

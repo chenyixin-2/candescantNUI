@@ -20,10 +20,23 @@ namespace CCT.NUI.HandTracking.Gesture
             
             if ( fingerCount != (int)Gestures.Click )
             {
-                gestureState = null;
+                if (!this.InAbnormal())
+                {
+                    this.BeginAbnormal();
+                }
+                else // in abnormal
+                {
+                    if (this.TimeToQuitGesture())
+                        gestureState = null;
+                }
             }
             else if ( fingerCount == (int)Gestures.Click )
             {
+                if (this.InAbnormal())
+                {
+                    this.LeaveAbnormal();
+                }
+
                 gestureState = this;
 
                 this.clickMode.Process(handData);
@@ -32,6 +45,9 @@ namespace CCT.NUI.HandTracking.Gesture
 
         public override void cleanup()
         {
+            if (this.InAbnormal())
+                this.LeaveAbnormal();
+
             this.clickMode = new FingerClickMode();
         }
     }

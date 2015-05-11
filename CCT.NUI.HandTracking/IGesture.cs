@@ -10,6 +10,7 @@ namespace CCT.NUI.HandTracking.Gesture
 {
     public enum Gestures : int
     {
+        Null       = 0,
         Move_Write = 1,
         Drag_Ready = 2,
         Drag_On    = 4,

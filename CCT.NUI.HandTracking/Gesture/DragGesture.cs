@@ -100,6 +100,9 @@ namespace CCT.NUI.HandTracking.Gesture
             if (this.mouseDown)   //  critical 
                 UserInput.MouseUp();
 
+            if (this.InAbnormal())
+                this.LeaveAbnormal();
+
             this.ResetStateVariables();
         }
         private void ResetStateVariables()

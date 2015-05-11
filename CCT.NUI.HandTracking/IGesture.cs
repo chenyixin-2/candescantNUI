@@ -27,6 +27,7 @@ namespace CCT.NUI.HandTracking.Gesture
 
     public abstract class GestureBase : IGesture
     {
+        private DateTime? abnormalState;
         private int width, height;
 
         protected Point? lastPointOnScreen;
@@ -38,6 +39,7 @@ namespace CCT.NUI.HandTracking.Gesture
             this.width = w;
             this.height = h;
             this.name = name;
+            this.abnormalState = null;
         }
         private String name ;
         public String Name
@@ -76,6 +78,31 @@ namespace CCT.NUI.HandTracking.Gesture
 
             UserInput.SetCursorPositionAbsolute((int)newX, (int)newY);
             lastPointOnScreen = new Point((float)newX, (float)newY, 0);
+        }
+
+        protected void BeginAbnormal()
+        {
+            this.abnormalState = DateTime.Now;
+        }
+
+        protected void LeaveAbnormal()
+        {
+            this.abnormalState = null;
+        }
+
+        protected bool InAbnormal()
+        {
+            if (this.abnormalState.HasValue)
+                return true;
+            else
+                return false;
+        }
+        protected bool TimeToQuitGesture()
+        {
+            if (DateTime.Now > this.abnormalState.Value.AddMilliseconds(33 * 20))
+                return true;
+            else
+                return false;
         }
     }
 }

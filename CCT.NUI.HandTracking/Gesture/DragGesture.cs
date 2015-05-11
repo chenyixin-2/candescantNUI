@@ -25,10 +25,23 @@ namespace CCT.NUI.HandTracking.Gesture
             
             if ( fingerCount != (int)Gestures.Drag_On && fingerCount != (int)Gestures.Drag_Ready )
             {
-                gestureState = null;
+                if ( !this.InAbnormal() )
+                {
+                    this.BeginAbnormal();
+                }
+                else // in abnormal
+                {
+                    if (this.TimeToQuitGesture())
+                        gestureState = null;
+                }
             }
-            else // 
+            else // normal(valid) input
             {
+                if ( this.InAbnormal() )
+                {
+                    this.LeaveAbnormal();
+                }
+
                 gestureState = this;
                 var t = Point.Zero;
 
